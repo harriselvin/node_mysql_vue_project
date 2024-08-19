@@ -1,17 +1,23 @@
 <template>
     <div class="container-fluid">
-        <div class="row">
-            <p class="lead">
-                Made by Asheeka Samuels & Elvin Harris &copy; <span id="currYear"></span>
-            </p>
-        </div>
+      <div class="row">
+        <p class="lead">
+          Made by Asheeka Samuels & Elvin Harris &copy; {{ currentYear }}
+        </p>
+      </div>
     </div>
-</template>
-
-<script>
-export default {
+  </template>
+  
+  <script>
+  export default {
     name: "FooterComp",
-}
-</script>
-
-<style scoped></style>
+    data() {
+      return {
+        currentYear: new Date().getFullYear()
+      };
+    }
+  }
+  </script>
+  
+  <style scoped></style>
+  
