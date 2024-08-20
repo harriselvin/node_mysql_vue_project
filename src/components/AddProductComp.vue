@@ -44,7 +44,7 @@ export default {
   methods: {
     async addProduct() {
       try {
-        await axios.post('https://your-api-url/products', this.product);
+        await axios.post(' https://node-mysql-vue-project-60pu.onrender.com/products', this.product);
         this.$emit('product-added');
         this.close();
       } catch (error) {

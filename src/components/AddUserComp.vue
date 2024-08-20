@@ -47,7 +47,7 @@ export default {
   methods: {
     async addUser() {
       try {
-        await axios.post('https://your-api-url/users', this.user);
+        await axios.post('https://node-mysql-vue-project-60pu.onrender.com/users', this.user);
         this.$emit('user-added');
         this.close();
       } catch (error) {

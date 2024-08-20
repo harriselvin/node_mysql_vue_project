@@ -83,7 +83,7 @@
     methods: {
       async updateProd(id) {
           try {
-              await axios.patch(`https://eomp-backend-9rbd.onrender.com/Products/${id}`, {
+              await axios.patch(` https://node-mysql-vue-project-60pu.onrender.com/Products/${id}`, {
                   productName: this.productName,
                   Quantity: this.Quantity,
                   Price: this.Price,
