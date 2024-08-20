@@ -6,8 +6,8 @@ const userRouter = express.Router()
 // Users Info
 userRouter.get('/', fetchUsers)
         .get('/:id', fetchUser)
-        .post('/insert', addUser)
-        .delete('/delete/:id', deleteUser)
+        .post('/register', addUser)
         .patch('/update/:id', updateUser)
+        .delete('/delete/:id', deleteUser)
 
 export default userRouter

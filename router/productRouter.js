@@ -5,8 +5,8 @@ const prodRouter = express.Router()
 
 prodRouter.get('/', fetchProducts)
         .get('/:id', fetchProduct)
-        .post('/insert', addProduct)
-        .delete('/delete/:id', deleteProduct)
+        .post('/addProduct', addProduct)
         .patch('/update/:id', updateProduct)
+        .delete('/delete/:id', deleteProduct)
 
 export default prodRouter
