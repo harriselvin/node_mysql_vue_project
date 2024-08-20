@@ -11,7 +11,7 @@
     </div>
     
     <div class="recently-viewed">
-      <h2>Recently Viewed Products</h2>
+      <h2>Best Sellers</h2>
       <div class="product-list">
         <div class="product-item">
           <img src="path-to-image1.jpg" alt="Product 1">
@@ -28,7 +28,6 @@
           <h3>Product 3</h3>
           <p>$399.99</p>
         </div>
-        <!-- Add more products as needed -->
       </div>
     </div>
   </div>
@@ -63,7 +62,7 @@ export default {
   text-align: center;
   max-width: 800px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1); /* Slightly opaque background */
+  background: rgba(255, 255, 255, 0.1); 
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
   margin-bottom: 40px;
@@ -71,7 +70,7 @@ export default {
 
 h1 {
   font-size: 2.5em;
-  color: #00bcd4; /* Neon blue */
+  color: #00bcd4; 
   margin-bottom: 20px;
 }
 
@@ -82,7 +81,7 @@ p {
 }
 
 button.learn-more {
-  background: #00bcd4; /* Neon blue */
+  background: #00bcd4; 
   color: #fff;
   border: none;
   padding: 15px 30px;
@@ -93,26 +92,26 @@ button.learn-more {
 }
 
 button.learn-more:hover {
-  background: #03a9f4; /* Slightly lighter blue */
+  background: #03a9f4; 
   transform: scale(1.05);
 }
 
 button.learn-more:active {
-  background: #0288d1; /* Even darker blue */
+  background: #0288d1; 
 }
 
 .recently-viewed {
   width: 100%;
   max-width: 1200px;
   padding: 20px;
-  background: rgba(41, 32, 32, 0.1); /* Slightly opaque background */
+  background: rgba(41, 32, 32, 0.1); 
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 .recently-viewed h2 {
   font-size: 2em;
-  color: #00bcd4; /* Neon blue */
+  color: #00bcd4;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -125,7 +124,7 @@ button.learn-more:active {
 }
 
 .product-item {
-  background: rgba(255, 255, 255, 0.2); /* Slightly opaque background */
+  background: rgba(255, 255, 255, 0.2); 
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
   text-align: center;
@@ -141,7 +140,7 @@ button.learn-more:active {
 
 .product-item h3 {
   font-size: 1.2em;
-  color: #00bcd4; /* Neon blue */
+  color: #00bcd4; 
   margin: 10px 0;
 }
 

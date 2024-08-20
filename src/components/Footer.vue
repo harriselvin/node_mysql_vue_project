@@ -8,8 +8,9 @@
     </div>
   </template>
   
+  
   <script>
-  export default {
+ export default {
     name: "FooterComp",
     data() {
       return {
@@ -19,5 +20,7 @@
   }
   </script>
   
-  <style scoped></style>
+  <style scoped>
+
+  </style>
   
