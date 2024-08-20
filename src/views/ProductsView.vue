@@ -3,7 +3,7 @@
     <h1 class="text-center m-3 animate__animated animate__fadeInLeft">Products</h1>
     <div class="options">
       <div class="search">
-        <input type="text" v-model="search" placeholder="search" />
+        <input type="text" v-model="search" placeholder="Search" />
       </div>
       <div>
         <button @click="sortByPrice" class="sort">Sort by Price</button>
@@ -11,9 +11,9 @@
       </div>
     </div>
   
-    <div v-if="Products.length > 0" class="display container-fluid">
+    <div v-if="filteredProducts.length > 0" class="display container-fluid">
       <ProductCardComp
-        v-for="product of Products"
+        v-for="product in filteredProducts"
         :key="product.productID"
         :product="product"
       />
@@ -25,50 +25,55 @@
 </template>
 
 <script>
-import ProductCardComp from "@/components/ProductCardComp.vue";
+import { computed, ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import ProductCardComp from '@/components/ProductCardComp.vue';
 import SpinnerComp from '@/components/SpinnerComp.vue';
-import { mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-      search: "",
-      Categories: "All",
-    };
-  },
-  computed: {
-    ...mapState({
-      Products: state => state.products
-    }),
-    filteredProducts() {
-      return this.Products.filter(product => {
-        let isMatch = true;
-        if (
-          !product.productName.toLowerCase().includes(this.search.toLowerCase())
-        ) {
-          isMatch = false;
-        }
-        if (
-          this.Categories !== "All" &&
-          this.Categories !== product.Category
-        ) {
-          isMatch = false;
-        }
-        return isMatch;
-      });
-    },
-  },
-  methods: {
-    sortByPrice() {
-      this.Products.sort((a, b) => a.price - b.price);
-    },
-    sortByName() {
-      this.Products.sort((a, b) => a.productName.localeCompare(b.productName));
-    }
-  },
   components: {
     ProductCardComp,
     SpinnerComp
+  },
+  setup() {
+    const store = useStore();
+    const search = ref('');
+    const sortOrder = ref(''); // 'price' or 'name'
+    
+    const products = computed(() => store.state.products);
+    
+    onMounted(() => {
+      store.dispatch('fetchProducts');
+    });
+    
+    const filteredProducts = computed(() => {
+      const searchLower = search.value.toLowerCase();
+      return products.value
+        .filter(product => product.name.toLowerCase().includes(searchLower))
+        .sort((a, b) => {
+          if (sortOrder.value === 'price') {
+            return a.price - b.price;
+          } else if (sortOrder.value === 'name') {
+            return a.name.localeCompare(b.name);
+          }
+          return 0;
+        });
+    });
+
+    const sortByPrice = () => {
+      sortOrder.value = 'price';
+    };
+
+    const sortByName = () => {
+      sortOrder.value = 'name';
+    };
+
+    return {
+      search,
+      filteredProducts,
+      sortByPrice,
+      sortByName
+    };
   }
 };
 </script>
@@ -101,3 +106,4 @@ body {
   background-color: #0097a7; /* Slightly darker shade for hover */
 }
 </style>
+
