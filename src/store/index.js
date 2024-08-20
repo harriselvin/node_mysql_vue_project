@@ -1,60 +1,37 @@
-import { createStore } from 'vuex'
-import axios from 'axios'
-import { useCookies } from 'vue3-cookies'
-// import router from '@/router'
-import swal from 'sweetalert'
-import { applyToken } from '@/service/AuthenticatedUser.js'
-
-const { cookies } = useCookies()
-const apiURL = 'https://node-mysql-vue-project-60pu.onrender.com'
-applyToken(cookies.get('LegitUser')?.token)
+import { createStore } from 'vuex';
+import axios from 'axios';
 
 export default createStore({
   state: {
-    users: null,
-    user: null,
-    products: null,
-    recentProducts: null,
-    product: null
+    products: [], // Initialize products as an empty array
   },
   mutations: {
-    setUsers(state, value) {
-      state.users = value
+    // Mutation to set products in the store
+    setProducts(state, products) {
+      state.products = products;
     },
-    setUser(state, value) {
-      state.user = value
+    // Mutation to sort products by price
+    sortProductsByPrice(state) {
+      state.products.sort((a, b) => a.price - b.price);
     },
-    setProducts(state, value) {
-      state.products = value
+    // Mutation to sort products by name
+    sortProductsByName(state) {
+      state.products.sort((a, b) => a.productName.localeCompare(b.productName));
     },
-    setRecentProducts(state, value) {
-      state.recentProducts = value
-    },
-    setProduct(state, value) {
-      state.product = value
-    }
   },
   actions: {
     async fetchProducts({ commit }) {
       try {
-        const res = await axios.get(`${apiURL}/products`)
-        console.log(res.data)
-        commit('setProducts', res.data)
+        const response = await axios.get('https://your-api-url/products'); // Replace with your API URL
+        commit('setProducts', response.data);
       } catch (error) {
-        console.error('Error fetching products:', error)
-        await swal(`Server down or route does not exist`, "Try again", "error")
+        console.error('Error fetching products:', error);
+        commit('setProducts', []); // Default to an empty array on error
       }
     },
-    async fetchProduct({ commit }, id) {
-      try {
-        const res = await axios.get(`${apiURL}/products/${id}`)
-        commit('setProduct', res.data)
-      } catch (error) {
-        console.error('Error fetching product:', error)
-        await swal(`Error fetching product`, "Try again", "error")
-      }
-    },
-    // Define other actions...
   },
-  modules: {}
-})
+  getters: {
+    // Optionally add getters for more complex data transformations
+  },
+});
+
