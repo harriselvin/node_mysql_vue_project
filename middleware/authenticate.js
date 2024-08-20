@@ -6,11 +6,11 @@ import { getUserDB } from "../model/usersDB.js";
 config()
 
 const checkUser = async (req, res, next) => {
-    const { userProfile, userPass } = req.body;
-    let hashedPassword = (await getUserDB(username)).userPass
+    const {userProfile, userPass} = req.body;
+    let hashedPassword = (await getUserDB(userProfile)).userPass
 
     let result = await compare(userPass, hashedPassword)
-    if (result == true) {
+    if (result==true) {
         let token = jwt.sign({userProfile: userProfile}, process.env.SECRET_KEY, {expiresIn: '1h'})
 
         req.body.token = token 
@@ -21,10 +21,21 @@ const checkUser = async (req, res, next) => {
     }
 }
 
-// const verifyToken = (req, res, next) => {
-//     let {cookie} = req.headers
+const verifyToken = (req, res, next) => {
+    let {cookie} = req.headers
 
-//     let token = cookie && cookie.split('=')
-// }
+    let token = cookie && cookie.split('=')[1]
 
-export { checkUser }
+    console.log(cookie);
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if (err) {
+
+            res.json({message: 'Token has expired'})
+            return
+        }
+        req.body.user = decoded.userProfile
+        next()
+    })
+}
+
+export { checkUser, verifyToken }

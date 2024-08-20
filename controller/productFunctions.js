@@ -12,7 +12,7 @@ const addProduct = async (req, res) => {
     let {prodName, quantity, amount, category, prodUrl} = req.body
 
     await addProductDB(prodName, quantity, amount, category, prodUrl)
-    res.send('Product was successfully added')
+    res.status(200).send('Product was successfully added')
 }
 
 const deleteProduct = async (req, res) => {

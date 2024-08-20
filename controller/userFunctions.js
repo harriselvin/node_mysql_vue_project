@@ -1,4 +1,5 @@
 import { getUsersDB, getUserDB, addUserDB, deleteUserDB, updateUserDB } from "../model/usersDB.js";
+import { hash } from 'bcrypt';
 
 const fetchUsers = async (req, res) => {
     res.json(await getUsersDB())
@@ -10,9 +11,13 @@ const fetchUser = async (req, res) => {
 
 const addUser = async (req, res) => {
     let { firstName, lastName, userAge, gender, userRole, emailAdd, userPass, userProfile } = req.body;
-    
-    await addUserDB(firstName, lastName, userAge, gender, userRole, emailAdd, userPass, userProfile)
-    res.send('User was successfully added')
+
+    hash(userPass, 10, async (err, hashedP) => {
+        if (err) throw err
+        
+        await addUserDB(firstName, lastName, userAge, gender, userRole, emailAdd, hashedP, userProfile)
+        res.status(200).send('User was successfully added')
+    }) 
 }
 
 const deleteUser = async (req, res) => {
