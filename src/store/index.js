@@ -3,18 +3,17 @@ import axios from 'axios';
 
 export default createStore({
   state: {
-    products: [], // Initialize products as an empty array
+    products: [], 
   },
   mutations: {
-    // Mutation to set products in the store
     setProducts(state, products) {
       state.products = products;
     },
-    // Mutation to sort products by price
+
     sortProductsByPrice(state) {
       state.products.sort((a, b) => a.price - b.price);
     },
-    // Mutation to sort products by name
+
     sortProductsByName(state) {
       state.products.sort((a, b) => a.productName.localeCompare(b.productName));
     },
@@ -22,16 +21,17 @@ export default createStore({
   actions: {
     async fetchProducts({ commit }) {
       try {
-        const response = await axios.get('https://your-api-url/products'); // Replace with your API URL
+        const response = await axios.get('https://node-mysql-vue-project-60pu.onrender.com/products'); 
         commit('setProducts', response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
-        commit('setProducts', []); // Default to an empty array on error
+        commit('setProducts', []); 
       }
     },
   },
   getters: {
-    // Optionally add getters for more complex data transformations
+    allProducts: (state) => state.products,
+    productById: (state) => (id) => state.products.find(product => product.prodId === id),
+    productsByCategory: (state) => (category) => state.products.filter(product => product.category === category),
   },
 });
-
