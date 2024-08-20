@@ -6,13 +6,15 @@ import { getUserDB } from "../model/usersDB.js";
 config()
 
 const checkUser = async (req, res, next) => {
-    const {userProfile, userPass} = req.body;
-    let hashedPassword = (await getUserDB(userProfile)).userPass
+    const {emailAdd, userPass} = req.body;
+    let hashedPassword = (await getUserDB(emailAdd)).userPass
 
     let result = await compare(userPass, hashedPassword)
-    if (result==true) {
-        let token = jwt.sign({userProfile: userProfile}, process.env.SECRET_KEY, {expiresIn: '1h'})
+    if (result == true) {
+        let token = jwt.sign({emailAdd: emailAdd}, process.env.SECRET_KEY, {expiresIn: '1h'})
 
+        console.log(token);
+        
         req.body.token = token 
         next()
         return
