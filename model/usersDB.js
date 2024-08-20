@@ -7,11 +7,11 @@ const getUsersDB = async () => {
     return data
 }
 
-const getUserDB = async (id) => {
+const getUserDB = async (email) => {
     let [[data]] = await pool.query(`
         SELECT * FROM users
-        WHERE userID = ?
-        `, [id])
+        WHERE emailAdd = ?
+        `, [email])
     return data
 }
 
