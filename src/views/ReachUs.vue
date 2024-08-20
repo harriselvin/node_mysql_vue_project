@@ -5,7 +5,7 @@
       </div>
       <form @submit.prevent="submitForm">
         <div class="form-group">
-          <label for="name">Name:</label>
+          <label for="name">Name & Surname:</label>
           <input type="text" id="name" v-model="form.name" required />
         </div>
         <div class="form-group">
