@@ -37,4 +37,11 @@ const updateUser = async (req, res) => {
     res.send('User info was successfully updated')
 }
 
-export { fetchUsers, fetchUser, addUser, deleteUser, updateUser }
+const loginUser = async (req, res) => {
+    res.json({
+        message: 'You have signed in successfully',
+        token: req.body.token
+    })
+}
+
+export { fetchUsers, fetchUser, addUser, deleteUser, updateUser, loginUser }
