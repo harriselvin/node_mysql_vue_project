@@ -1,116 +1,103 @@
 <template>
-  <div>
-    <h1 class="text-center animate__animated animate__fadeInUp">Admin</h1>
-    
-    <div class="userSection">
-      <div class="titles">
-        <h3>Users</h3>
-        <button @click="showUserModal = true" class="addButton">Add User</button>
-      </div>
-      <div class="userTable">
-        <table>
-          <thead>
-            <tr>
-              <th>userID</th>
-              <th>First Name</th>
-              <th class="remove">Last Name</th>
-              <th class="emailHead">Email Address</th>
-              <th class="remove">Gender</th>
-              <th class="remove">Age</th>
-              <th>Action</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-for="user of users" :key="user.userID">
-            <tr v-if="users">
-              <td>{{ user.userID }}</td>
-              <td>{{ user.userName }}</td>
-              <td class="remove">{{ user.lastName }}</td>
-              <td class="emailHead">{{ user.emailAdd }}</td>
-              <td class="remove">{{ user.gender }}</td>
-              <td class="remove">{{ user.age }}</td>
-              <td><button @click="delUser(user.userID)" class="delButton">Delete</button></td>
-              <td><EditUserComp /></td>
-            </tr>
-            <tr v-else>
-              <td colspan="8">No users available</td>
-            </tr>
-          </tbody>
-        </table>
+  <h1 class="text-center animate__animated animate__fadeInUp">Admin</h1>
+  <div class="userSection">
+    <div class="titles">
+      <h3>Users</h3>
+      <div>
+        <AddUserComp />
       </div>
     </div>
-  
-    <div class="productSection">
-      <div class="titles">
-        <h3>Products</h3>
-        <button @click="showProductModal = true" class="addButton">Add Product</button>
-      </div>
-      <div class="productsTable">
-        <table>
-          <thead>
-            <tr>
-              <th class="remove">Product ID</th>
-              <th>Product Name</th>
-              <th class="remove">Quantity</th>
-              <th class="remove">Price</th>
-              <th class="imgHead">Category</th>
-              <th class="imgHead">Image</th>
-              <th>Action</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-for="product of products" :key="product.productID">
-            <tr v-if="products">
-              <td class="remove">{{ product.productID }}</td>
-              <td>{{ product.productName }}</td>
-              <td class="remove">{{ product.quantity }}</td>
-              <td class="remove">{{ product.price }}</td>
-              <td class="imgHead">{{ product.category }}</td>
-              <td class="imgHead"><img :src="product.imageURL" :alt="product.productName" /></td>
-              <td><button @click="delProduct(product.productID)" class="delButton">Delete</button></td>
-              <td><EditProductComp /></td>
-            </tr>
-            <tr v-else>
-              <td colspan="8">No products available</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="userTable">
+      <table>
+        <tr>
+          <th>userID</th>
+          <th>First Name</th>
+          <th class="remove">Last Name</th>
+          <th class="emailHead">Email Address</th>
+          <th class="remove">Gender</th>
+          <th class="remove">Age</th>
+          <th>Action</th>
+          <th>Action</th>
+        </tr>
+        <tbody v-for="user of users" :key="user.userID" :user="user">
+          <tr v-if="users">
+            <td>{{ user.userID }}</td>
+            <td>{{ user.userName }}</td>
+            <td class="remove">{{ user.lastName }}</td>
+            <td class="emailHead">{{ user.emailAdd }}</td>
+            <td class="remove">{{ user.gender }}</td>
+            <td class="remove">{{ user.age }}</td>
+            <td><button @click="delUser(user.userID)" class="delButton">Delete</button></td>
+            <td>
+              <edit-user-comp/>
+            </td>
+          </tr>
+          <tr v-else>
+            no
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="productSection">
+    <div class="titles">
+      <h3>Products</h3>
+      <div>
+        <add-product-comp />
       </div>
     </div>
-
-    <!-- User Modal -->
-    <AddUserComp
-      :show="showUserModal"
-      @close="showUserModal = false"
-      @user-added="refreshData"
-    />
-
-    <!-- Product Modal -->
-    <AddProductComp
-      :show="showProductModal"
-      @close="showProductModal = false"
-      @product-added="refreshData"
-    />
+    <div class="productsTable">
+      <table>
+        <thead>
+          <tr>
+            <th class="remove">Product ID</th>
+            <th>Product Name</th>
+            <th class="remove">Quantity</th>
+            <th class="remove">Price</th>
+            <th class="imgHead">Category</th>
+            <th class="imgHead">Image</th>
+            <th>Action</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody
+          v-for="product of products"
+          :key="product.productID"
+          :product="product"
+        >
+          <tr v-if="products">
+            <td class="remove">{{ product.productID }}</td>
+            <td>{{ product.productName }}</td>
+            <td class="remove">{{ product.Quantity }}</td>
+            <td class="remove">{{ product.Price }}</td>
+            <td class="imgHead">{{ product.Category }}</td>
+            <td class="imgHead"><img :src="product.imageURL" :alt="product.productName" /></td>
+            <td>
+              <button @click="delProduct(product.productID)" class="delButton">Delete</button>
+            </td>
+            <td>
+                <edit-product-comp/>
+            </td>
+          </tr>
+          <tr v-else>
+            no
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
-import AddUserComp from "@/components/AddUserComp.vue";
-import AddProductComp from "@/components/AddProductComp.vue";
-import EditProductComp from '@/components/EditProductComp.vue';
-import EditUserComp from "@/components/EditUserComp.vue";
-import axios from "axios";
-
+import AddUserComp from "@/components/AddUserComp.vue"
+import AddProductComp from "@/components/AddProductComp.vue"
+import EditProductComp from '@/components/EditProductComp.vue'
+import EditUserComp from "@/components/EditUserComp.vue"
+import axios from "axios"
 export default {
   created() {
-    this.$store.dispatch("getProducts");
-    this.$store.dispatch("getUsers");
-  },
-  data() {
-    return {
-      showUserModal: false,
-      showProductModal: false,
-    };
+    this.$store.dispatch("getProducts"), this.$store.dispatch("getUsers");
   },
   computed: {
     products() {
@@ -123,44 +110,37 @@ export default {
   methods: {
     async delProduct(id) {
       try {
-        await axios.delete(`https://your-api-url/products/${id}`);
+        await axios.delete(
+          `https://node-mysql-vue-project-60pu.onrender.com/Products/${id}`
+        );
         this.$store.dispatch("getProducts");
         alert("Product Removed");
+        window.location.reload();
       } catch (error) {
-        alert(error.message);
+        alert(error);
       }
     },
     async delUser(id) {
       try {
-        await axios.delete(`https://your-api-url/users/${id}`);
+        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/user/${id}`);
         this.$store.dispatch("getUsers");
-        alert("User Removed");
+        alert("This user has been removed");
+        window.location.reload();
       } catch (error) {
-        alert(error.message);
+        alert(error);
       }
-    },
-    refreshData() {
-      this.$store.dispatch("getProducts");
-      this.$store.dispatch("getUsers");
     },
   },
   components: {
     AddUserComp,
     AddProductComp,
     EditProductComp,
-    EditUserComp,
+    EditUserComp
   },
 };
 </script>
 
 <style scoped>
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  color: #333; /* Default text color */
-  background-color: #fff; /* Background color */
-}
-
 img {
   height: 80px;
   width: 80px;
@@ -171,18 +151,15 @@ table {
   text-align: center;
   margin: auto;
 }
-
 th {
-  border: 2px solid #00bcd4; /* Border color */
+  border: 2px solid #ce1212;
   width: 150px;
   padding: 10px;
-  background-color: #00bcd4; /* Background color */
-  color: #fff; /* Text color */
 }
 
 td {
   padding: 10px;
-  border: 2px solid #00bcd4; /* Border color */
+  border: 2px solid #ce1212;
 }
 
 .titles {
@@ -191,36 +168,40 @@ td {
 }
 
 .userSection, .productSection {
-  margin: 20px;
+    margin: 20px;
 }
 
 .delButton {
-  background: #00bcd4; /* Background color */
-  color: #fff; /* Text color */
-  border: 2px solid #00bcd4; /* Border color */
+    background: #ce1212;
+  color: #eeebdd;
+  border: 2px solid #ce1212;
   border-radius: 30px;
   box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
 }
 
 .delButton:hover {
-  color: #fff; /* Text color */
-  background: #0097a7; /* Slightly darker shade for hover */
-  box-shadow: 0 0 30px 5px #0097a7; /* Slightly darker shade for hover */
+     color: #eeebdd;
+  background: #ce1212;
+  box-shadow: 0 0 30px 5px #ce1212;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
-/* Media Queries */
 @media only screen and (max-width: 700px) {
-  .imgHead, .emailHead {
+  .imgHead, .emailHead{
     display: none;
   }
   table {
     width: 100%;
   }
+ 
 }
 
-@media only screen and (max-width: 305px) {
+@media only screen and (max-width: 305px){
   .remove {
     display: none;
   }

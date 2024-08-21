@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
     <div class="container-fluid">
       <!-- Logo as a "Back to Home" button -->
       <router-link class="navbar-brand" to="/">
@@ -36,9 +36,8 @@
 <style scoped>
 /* General Navbar Styles */
 nav {
-  background-color: black; /* Background color */
+  background-color: #1B1717 !important; /* Dark background */
   margin-bottom: 20px;
-  color: white; /* Text color */
 }
 
 /* Logo Styling */
@@ -57,13 +56,13 @@ nav {
 /* Nav Buttons Styling */
 .navButtons {
   margin: 0 15px; /* Space out the nav links */
-  color: white; /* Link color */
+  color: #EEEBDD; /* Link color */
   text-decoration: none; /* Remove underline from links */
   font-size: 16px; /* Font size for links */
 }
 
 /* Active Link Styling */
 .navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid #00bcd4; /* Active link underline color */
+  border-bottom: 2px solid #CE1212; /* Active link underline */
 }
 </style>

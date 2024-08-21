@@ -1,97 +1,152 @@
 <template>
-  <div v-if="show" class="modal-overlay">
-    <div class="modal-content">
-      <h2>Add New Product</h2>
-      <form @submit.prevent="addProduct">
-        <label for="productName">Product Name:</label>
-        <input v-model="product.productName" type="text" id="productName" required />
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    class=""
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+  >
+    Add a Product
+  </button>
 
-        <label for="quantity">Quantity:</label>
-        <input v-model="product.quantity" type="number" id="quantity" required />
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Product</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            X
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="inputs">
+            <label>Product Name</label>
+            <input
+              type="text"
+              v-model="productName"
+              placeholder="Defy Toaster"
+            /><br />
+          </div>
 
-        <label for="price">Price:</label>
-        <input v-model="product.price" type="number" step="0.01" id="price" required />
+          <div class="inputs">
+            <label>Quantity</label>
+            <input type="number" v-model="Quantity" placeholder="45" /><br />
+          </div>
 
-        <label for="category">Category:</label>
-        <input v-model="product.category" type="text" id="category" required />
+          <div class="inputs">
+            <label>Price</label>
+            <input type="number" v-model="Price" placeholder="400" /><br />
+          </div>
 
-        <label for="imageURL">Image URL:</label>
-        <input v-model="product.imageURL" type="text" id="imageURL" />
+          <div class="inputs">
+            <label>Category</label>
+            <input type="text" v-model="Category" placeholder="Toaster" /><br />
+          </div>
 
-        <button type="submit">Add Product</button>
-        <button type="button" @click="close">Cancel</button>
-      </form>
+          <div class="inputs">
+            <label>Image URL</label>
+            <input type="url" v-model="imageURL" /><br />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" @click="addNewProd()">Submit</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
+import axios from "axios";
 export default {
-  props: ['show'],
   data() {
     return {
-      product: {
-        productName: '',
-        quantity: null,
-        price: null,
-        category: '',
-        imageURL: '',
-      },
+      productName: "",
+      Quantity: "",
+      Price: "",
+      Category: "",
+      imageURL: "",
     };
   },
   methods: {
-    async addProduct() {
+    async addNewProd() {
       try {
-        await axios.post(' https://node-mysql-vue-project-60pu.onrender.com/products', this.product);
-        this.$emit('product-added');
-        this.close();
+        await axios.post("https://node-mysql-vue-project-60pu.onrender.com/Product", {
+          productName: this.productName,
+          Quantity: this.Quantity,
+          Price: this.Price,
+          Category: this.Quantity,
+          imageURL: this.imageURL,
+        });
+        this.productName = "";
+        this.Quantity = "";
+        this.Price = "";
+        this.Category = "";
+        this.imageURL = "";
+        alert("Product Has Been Added");
+        window.location.reload();
       } catch (error) {
-        console.error('Error adding product:', error);
+        alert(error);
       }
-    },
-    close() {
-      this.$emit('close');
     },
   },
 };
 </script>
 
 <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+button {
+  background: #ce1212;
+  color: #eeebdd;
+  border: 2px solid #ce1212;
+  width: 120px;
+  border-radius: 30px;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+button:hover {
+  color: #eeebdd;
+  background: #ce1212;
+  box-shadow: 0 0 30px 5px #ce1212;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 .modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  margin: 5px 0;
+  background: #1b1717 !important;
+  color: #eeebdd !important;
+  display: block;
 }
 
 input {
-  margin-bottom: 10px;
+  color: #eeebdd !important;
+  border: 2px solid #ce1212;
+  background: #ce1212 !important;
+  border-radius: 20px;
+  margin: 15px;
+  width: 60%;
 }
 
-button {
-  margin-top: 10px;
+::placeholder {
+    color: #eeebdd;
 }
 </style>

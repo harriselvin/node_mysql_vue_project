@@ -1,14 +1,14 @@
 <template>
-  <router-link :to="{ name: 'product', params: { id: product.prodId } }">
+  <router-link :to="{ name: 'product', params: { id: product.productID } }">
     <div class="card">
       <img
-        :src="product.prodUrl"
+        :src="product.imageURL"
         class="card-img-top"
-        :alt="product.prodName"
+        :alt="product.productName"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ product.prodName }}</h5>
-        <p class="card-text">Price: R {{ product.amount }}</p>
+        <h5 class="card-title">{{ product.productName }}</h5>
+        <p class="card-text">Price: R {{ product.Price }}</p>
       </div>
     </div>
   </router-link>
@@ -16,33 +16,52 @@
 
 <script>
 export default {
-  props: {
-    product: {
-      type: Object,
-      required: true
-    }
-  }
+  props: ["product"],
 };
 </script>
 
 <style scoped>
 .card {
-  border: 1px solid #ddd;
-  border-radius: 0.25rem;
-  margin: 1rem;
-  overflow: hidden;
+  width: 20rem;
+  margin: 20px;
+  background-color: #1b1717;
+  color: #eeebdd;
+  border: 2px solid #ce1212;
+  border-radius: 30px;
+  padding: 5px;
+}
+.card:hover {
+  box-shadow: 0 0 30px 5px #CE1212
 }
 .card-img-top {
-  width: 100%;
-  height: auto;
+  height: 40vh;
+  width: 18rem;
+  border-radius: 30px;
+  margin: auto;
+  padding: 15px;
 }
-.card-body {
-  padding: 1rem;
+
+a {
+    text-decoration: none;
 }
-.card-title {
-  margin-bottom: 0.75rem;
+
+@media only screen and (max-width: 700px) {
+    .card {
+        width: 18rem;
+    }
+    .card-img-top {
+        width: 16rem;
+        height: 14rem;
+    }
 }
-.card-text {
-  margin-bottom: 0;
+
+@media only screen and (max-width: 450px) {
+    .card {
+        width: 16rem;
+    }
+    .card-img-top {
+        width: 14rem;
+        height: 16rem;
+    }
 }
 </style>
