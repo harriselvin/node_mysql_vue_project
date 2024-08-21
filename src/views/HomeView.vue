@@ -15,21 +15,32 @@
     <section class="best-sellers">
       <h2>Best Sellers</h2>
       <div class="product-list">
-        <div class="product-item">
+        <!-- Product 1 -->
+        <router-link to="/products/1" class="product-item">
           <img src="https://static.wixstatic.com/media/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg/v1/fill/w_430,h_430,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_3ab3d3acd73843deba1dece7b2254e2f~mv2.jpg" alt="Product 1">
-          <h3>Product 1</h3>
-          <p>$199.99</p>
-        </div>
-        <div class="product-item">
+          <div>
+            <h3>Product 1</h3>
+            <p>$199.99</p>
+          </div>
+        </router-link>
+        
+        <!-- Product 2 -->
+        <router-link to="/products/2" class="product-item">
           <img src="https://static.wixstatic.com/media/c22c23_527e6c6f3d944fb88c80907c2f754afb~mv2.jpg/v1/fill/w_416,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_527e6c6f3d944fb88c80907c2f754afb~mv2.jpg" alt="Product 2">
-          <h3>Product 2</h3>
-          <p>$299.99</p>
-        </div>
-        <div class="product-item">
+          <div>
+            <h3>Product 2</h3>
+            <p>$299.99</p>
+          </div>
+        </router-link>
+        
+        <!-- Product 3 -->
+        <router-link to="/products/3" class="product-item">
           <img src="https://static.wixstatic.com/media/c22c23_77c2b89535374768bec1d6337dcdbddc~mv2.jpg/v1/fill/w_416,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_77c2b89535374768bec1d6337dcdbddc~mv2.jpg" alt="Product 3">
-          <h3>Product 3</h3>
-          <p>$399.99</p>
-        </div>
+          <div>
+            <h3>Product 3</h3>
+            <p>$399.99</p>
+          </div>
+        </router-link>
       </div>
     </section>
   </div>
@@ -40,6 +51,24 @@ export default {
   name: "LandingPage"
 };
 </script>
+
+<style scoped>
+.product-item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+}
+
+.product-item div {
+  padding: 10px;
+}
+</style>
+
 
 <style scoped>
 * {
