@@ -1,26 +1,32 @@
 import { compare } from "bcrypt";
 import jwt from 'jsonwebtoken';
 import { config } from "dotenv";
-import { getUserDB } from "../model/usersDB.js";
+import { loginUserDB } from "../model/usersDB.js";
 
 config()
 
 const checkUser = async (req, res, next) => {
     const {emailAdd, userPass} = req.body;
-    let hashedPassword = (await getUserDB(emailAdd)).userPass
+    let hashedPassword = (await loginUserDB(emailAdd)).userPass
 
     let result = await compare(userPass, hashedPassword)
-    if (result == true) {
-        let token = jwt.sign({emailAdd: emailAdd}, process.env.SECRET_KEY, {expiresIn: '1h'})
-
-        console.log(token);
-        
-        req.body.token = token 
-        next()
-        return
-    } else {
-        res.send('Invalid password')
+    try {
+        if (result == true) {
+            let token = jwt.sign({emailAdd: emailAdd}, process.env.SECRET_KEY, {expiresIn: '1h'})
+    
+            req.body.token = token 
+            next()
+            return
+        } else {
+            res.status(400).json({message: "Invalid email or password"})
+        }
+    } catch (error) {
+        console.log({
+            status: 400, 
+            message: "Invalid email or password"
+        })
     }
+    
 }
 
 const verifyToken = (req, res, next) => {
