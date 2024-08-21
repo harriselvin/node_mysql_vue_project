@@ -1,108 +1,4 @@
-<!-- <template>
-  <div>
-    <h1 class="text-center m-3 animate__animated animate__fadeInLeft">Products</h1>
-    <div class="options">
-      <div class="search">
-        <input type="text" v-model="search" placeholder="Search" />
-      </div>
-      <div>
-        <button @click="sortByPrice" class="sort">Sort by Price</button>
-        <button @click="sortByName" class="sort">Sort by Name</button>
-      </div>
-    </div>
-  
-    <div v-if="Products.length > 0" class="display container-fluid">
-      <ProductCardComp
-        v-for="product in Products"
-        :key="product.prodId"
-        :product="product"
-      />
-    </div>
-    <div v-else class="d-flex justify-content-center">
-      <SpinnerComp />
-    </div>
-  </div>
-</template>
-
-<script>
-import ProductCardComp from "@/components/ProductCardComp.vue";
-import SpinnerComp from '@/components/SpinnerComp.vue';
-
-export default {
-  data() {
-    return {
-      search: "",
-      Categories: "All",
-    };
-  },
-  methods: {
-    sortByPrice() {
-      this.$store.commit("sortByPrice");
-    },
-    sortByName() {
-      this.$store.commit("sortByName");
-    },
-  },
-  computed: {
-    Products() {
-      return this.$store.state.products?.filter((product) => {
-        let isMatch = true;
-        if (
-          !product.prodName.toLowerCase().includes(this.search.toLowerCase())
-        ) {
-          isMatch = false;
-        }
-        if (
-          this.Categories !== "All" &&
-          this.Categories !== product.category
-        ) {
-          isMatch = false;
-        }
-        return isMatch;
-      });
-    },
-  },
-  mounted() {
-    this.$store.dispatch("fetchProducts");
-  },
-  components: {
-    ProductCardComp,
-    SpinnerComp,
-  },
-};
-</script>
-
-
-<style scoped>
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  color: #333; /* Default text color */
-  background-color: #fff; /* Background color */
-}
-
-.container-fluid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.sort {
-  margin: 10px;
-  padding: 10px;
-  background-color: #00bcd4; /* Background color */
-  color: #fff; /* Text color */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.sort:hover {
-  background-color: #0097a7; /* Slightly darker shade for hover */
-}
-</style>
- -->
- <template>
+<template>
   <div>
     <!-- Main Banner Area -->
     <div class="page-heading" id="top">
@@ -289,6 +185,7 @@ body {
   background-color: #00bcd4; /* Banner background color */
   color: white;
   padding: 2rem 0;
+  text-align: center; /* Center-align text */
 }
 
 .page-heading h2 {
@@ -300,13 +197,26 @@ body {
   font-size: 1.25rem;
 }
 
-.section-heading h2 {
-  color: #00bcd4;
+/* Section Styles */
+.section {
+  padding: 4rem 0;
+}
+
+/* Search & Sort Options */
+.options {
+  margin-bottom: 2rem;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .sort {
-  margin: 10px;
-  padding: 10px;
+  margin: 0 10px;
+  padding: 10px 20px;
   background-color: #00bcd4; /* Background color */
   color: #fff; /* Text color */
   border: none;
@@ -319,46 +229,74 @@ body {
   background-color: #0097a7; /* Slightly darker shade for hover */
 }
 
+/* Card Container Styles */
 .card {
-  border: 1px solid #ddd; /* Border color */
-  border-radius: 8px; /* Rounded corners */
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  transition: box-shadow 0.3s ease;
+  background: #1b1b1b; /* Dark background for product items */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow */
+  text-align: center;
+  padding: 15px;
+  width: 250px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
 }
 
+/* Card Image Styles */
 .card-img-top {
-  object-fit: cover;
-  height: 200px; /* Adjust height as needed */
+  width: 100%; /* Full width to fit the card */
+  height: auto; /* Fixed height for the image */
+  object-fit: cover; /* Ensure images cover the area */
+  border-bottom: 2px solid #00bcd4; /* Teal border below image */
+  transition: opacity 0.3s; /* Smooth transition for hover effect */
 }
 
+.card:hover .card-img-top {
+  opacity: 0.9; /* Slightly fade image on hover */
+}
+
+/* Card Body Styles */
 .card-body {
-  background-color: #f8f9fa; /* Light background for card body */
-  padding: 1.25rem;
+  padding: 15px;
 }
 
+/* Card Title Styles */
 .card-title {
-  color: #00bcd4; /* Card title color */
+  font-size: 1.25em;
+  color: #00bcd4; /* Teal color for titles */
+  margin-bottom: 10px;
 }
 
+/* Card Text Styles */
 .card-text {
-  color: #333; /* Text color */
+  font-size: 1em;
+  color: #ddd; /* Light grey for text */
+  margin-bottom: 15px;
 }
 
+/* Button Styles */
 .btn-primary {
-  background-color: #00bcd4;
-  border-color: #00bcd4;
+  background-color: #00bcd4; /* Teal background for button */
+  color: #fff; /* White text color */
+  border: none; /* Remove default border */
+  border-radius: 30px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for button */
+  font-size: 1em; /* Font size */
+  font-weight: bold; /* Bold text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Ensure it displays correctly */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
 }
 
 .btn-primary:hover {
-  background-color: #0097a7;
-  border-color: #00796b;
+  background-color: #03a9f4; /* Lighter blue on hover */
+  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4); /* Subtle shadow on hover */
 }
 
+/* Pagination Styles */
 .pagination .page-item.active .page-link {
   background-color: #00bcd4;
   border-color: #00bcd4;
@@ -371,5 +309,16 @@ body {
 .pagination .page-link:hover {
   color: #00bcd4;
   background-color: #f8f9fa;
+}
+
+/* Responsive Design for Cards */
+@media (max-width: 768px) {
+  .card {
+    border-width: 1px; /* Thinner border on smaller screens */
+  }
+  
+  .card-img-top {
+    height: 150px; /* Adjust height for smaller screens */
+  }
 }
 </style>
