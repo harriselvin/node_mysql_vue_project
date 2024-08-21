@@ -20,10 +20,11 @@ const checkUser = async (req, res, next) => {
         } else {
             res.status(400).json({message: "Invalid email or password"})
         }
-    } catch (error) {
+    } catch (err) {
         console.log({
             status: 400, 
-            message: "Invalid email or password"
+            message: "Invalid email or password",
+            error: err
         })
     }
     
