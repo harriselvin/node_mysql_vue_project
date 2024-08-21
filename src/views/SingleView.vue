@@ -1,43 +1,57 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <h2 class="display-2">Product Details</h2>
-        </div>
-        <div class="row justify-content-center" v-if="product">
-            <Card>
-                <template #cardHeader>
-                    {{ product.productURL }}
-                    <img :src="product.prodURL" loading="lazy" class="img-fluid" :alt="product.prodName">
-                </template>
-                <template #cardBody>
-                    <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
-                    <p class="lead">
-                        {{ product.prodDescription }}
-                    </p>
-                    <p class="lead"><span class="text-success fw-bold">Amount</span>: R{{ product.amount }}</p>
-                </template>
-            </Card>
-        </div>
-        <div v-else> 
-            <Spinner/>
-        </div>
+    <div v-if="product" class="container-fluid text-center">
+        <h1>{{ product[0].productName }}</h1>
+        <img :src="product[0].imageURL" :alt="product[0].productName" class="img-fluid"/>
+        <p>Price: R {{ product[0].Price }}</p>
+        <p>Stock Left: {{ product[0].Quantity }}</p>
     </div>
+    <div v-else class="d-flex justify-content-center">
+        <spinner-comp/>
+    </div>
+
 </template>
 
-<script setup>
-import { useStore } from 'vuex'
-import { computed, onMounted } from 'vue'
-import Card from '@/components/Card.vue'
-import Spinner from '@/components/SpinnerComp.vue'
-import { useRoute } from 'vue-router'
-const store = useStore()
-const route = useRoute()
-const product = computed(
-    () => store.state.product
-)
-onMounted(() => {
-    store.dispatch('fetchProduct', route.params.id)
-}) 
+<script>
+import SpinnerComp from '@/components/SpinnerComp.vue';
+export default {
+    props: ["productID"],
+    computed: {
+        product() {
+            return this.$store.state.product;
+        },
+    },
+    mounted() {
+        this.$store.dispatch("getProduct", this.$route.params.id );
+    },
+    components: {
+        SpinnerComp
+    }
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.text-center {
+    height: 70vh;
+    align-items: center;
+    border-top: 2px solid #ce1212;
+    border-bottom: 2px solid #ce1212;
+    width: 60%;
+    margin: auto;
+}
+img {
+    height: 300px;
+    border-radius: 30px;
+    margin: 20px;
+}
+
+img:hover {
+    transform: scale(1.1);
+}
+
+@media only screen and (max-width:701px) {
+    .text-center {
+        margin: auto !important;
+    }
+}
+</style>
