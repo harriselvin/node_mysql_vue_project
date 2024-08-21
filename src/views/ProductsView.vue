@@ -7,7 +7,6 @@
           <div class="col-lg-12">
             <div class="inner-content">
               <h2>Check Our Products</h2>
-              <span>Awesome & Creative HTML CSS layout by TemplateMo</span>
             </div>
           </div>
         </div>
@@ -15,7 +14,7 @@
     </div>
     
     <!-- Products Area -->
-    <section class="section" id="products">
+    <section class="products-page" id="products">
       <div class="container">
         <!-- Options (Search and Sort) -->
         <div class="options row mb-4">
@@ -31,14 +30,14 @@
         </div>
 
         <!-- Products Display -->
-        <div v-if="filteredProducts.length > 0" class="row">
-          <div v-for="product in filteredProducts" :key="product.prodId" class="col-lg-3 mb-4">
+        <div v-if="filteredProducts.length > 0" class="row justify-content-center">
+          <div v-for="product in filteredProducts" :key="product.prodId" class="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="card">
               <img :src="product.prodUrl" :alt="product.prodName" class="card-img-top" />
               <div class="card-body">
                 <h5 class="card-title">{{ product.prodName }}</h5>
                 <p class="card-text">Price: {{ product.amount }}</p>
-                <a href="single-product.html" class="btn btn-primary">View Details</a>
+                <a href="single-product.html" class="btn btn-primary">View More</a>
               </div>
             </div>
           </div>
@@ -73,7 +72,7 @@ export default {
       search: "",
       sortOrder: 'asc',
       products: [
-        // Products data here
+
         {
           prodId: 1,
           prodName: "Ocean Pro 11 - 12.3 Touch Screen",
@@ -102,7 +101,7 @@ export default {
         prodId: 4,
         prodName: "Smartphone Z Pixel Max 128GB Unlocked",
         quantity: 1,
-        amount: "1515.80",
+        amount: "1515.80"
         category: "Smartphones",
         prodUrl: "https://static.wixstatic.com/media/c22c23_527e6c6f3d944fb88c80907c2f754afb~mv2.jpg/v1/fill/w_416,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_527e6c6f3d944fb88c80907c2f754afb~mv2.jpg"
         },
@@ -174,151 +173,139 @@ export default {
 </script>
 
 <style scoped>
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  color: #333; /* Default text color */
-  background-color: #fff; /* Background color */
-}
 
-.page-heading {
-  background-color: #00bcd4; /* Banner background color */
-  color: white;
-  padding: 2rem 0;
-  text-align: center; /* Center-align text */
-}
-
-.page-heading h2 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-.page-heading span {
-  font-size: 1.25rem;
-}
-
-/* Section Styles */
-.section {
-  padding: 4rem 0;
-}
-
-/* Search & Sort Options */
 .options {
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  margin: 10px;
 }
 
-.search input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+input {
+  color: #eeebdd !important;
+  border: 2px solid #00bcd4;
+  background: #00bcd4 !important;
+  border-radius: 20px;
+}
+
+::placeholder {
+  color: #eeebdd;
 }
 
 .sort {
-  margin: 0 10px;
-  padding: 10px 20px;
-  background-color: #00bcd4; /* Background color */
-  color: #fff; /* Text color */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background: #00bcd4;
+  color: #eeebdd;
+  border: 2px solid #00bcd4;
+  border-radius: 30px;
+  width: 120px;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-left: 20px;
 }
 
 .sort:hover {
-  background-color: #0097a7; /* Slightly darker shade for hover */
+  color: #eeebdd;
+  background: #00bcd4;
+  box-shadow: 0 0 30px 5px #00bcd4;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 
-/* Card Container Styles */
+.display {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.row.justify-content-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4.5rem;
+}
+
+/* Main Banner Area */
+.page-heading {
+  background-color: #f8f9fa;
+  padding: 40px 0;
+  margin-bottom: 20px;
+}
+
+.page-heading .inner-content h2 {
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.page-heading .inner-content span {
+  display: block;
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Search and Sort Options */
+.search input {
+  border-radius: 0.25rem;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Product Cards */
 .card {
   background: #1b1b1b; /* Dark background for product items */
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow */
-  text-align: center;
+  
   padding: 15px;
   width: 250px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px); /* Slight lift effect on hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
 }
 
-/* Card Image Styles */
 .card-img-top {
-  width: 100%; /* Full width to fit the card */
-  height: auto; /* Fixed height for the image */
-  object-fit: cover; /* Ensure images cover the area */
-  border-bottom: 2px solid #00bcd4; /* Teal border below image */
-  transition: opacity 0.3s; /* Smooth transition for hover effect */
-}
-
-.card:hover .card-img-top {
-  opacity: 0.9; /* Slightly fade image on hover */
-}
-
-/* Card Body Styles */
-.card-body {
-  padding: 15px;
-}
-
-/* Card Title Styles */
-.card-title {
-  font-size: 1.25em;
-  color: #00bcd4; /* Teal color for titles */
+  width: 100%; /* Make image fit the width of the container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px;
   margin-bottom: 10px;
+  object-fit: cover;
 }
 
-/* Card Text Styles */
-.card-text {
-  font-size: 1em;
-  color: #ddd; /* Light grey for text */
-  margin-bottom: 15px;
+.card-body {
+  padding: 5px;
+  margin: 10px;
 }
 
-/* Button Styles */
-.btn-primary {
-  background-color: #00bcd4; /* Teal background for button */
-  color: #fff; /* White text color */
-  border: none; /* Remove default border */
-  border-radius: 30px; /* Rounded corners */
-  padding: 10px 20px; /* Padding for button */
-  font-size: 1em; /* Font size */
-  font-weight: bold; /* Bold text */
-  text-decoration: none; /* Remove underline */
-  display: inline-block; /* Ensure it displays correctly */
-  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
-}
-
-.btn-primary:hover {
-  background-color: #03a9f4; /* Lighter blue on hover */
-  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4); /* Subtle shadow on hover */
-}
-
-/* Pagination Styles */
+/* Pagination */
 .pagination .page-item.active .page-link {
-  background-color: #00bcd4;
-  border-color: #00bcd4;
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
 }
 
 .pagination .page-link {
-  color: #333;
+  border-radius: 0.25rem;
 }
 
-.pagination .page-link:hover {
-  color: #00bcd4;
-  background-color: #f8f9fa;
-}
-
-/* Responsive Design for Cards */
-@media (max-width: 768px) {
-  .card {
-    border-width: 1px; /* Thinner border on smaller screens */
-  }
-  
-  .card-img-top {
-    height: 150px; /* Adjust height for smaller screens */
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .col-lg-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 </style>
