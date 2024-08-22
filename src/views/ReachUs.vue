@@ -1,73 +1,37 @@
 <template>
   <div class="contact-page">
     <div class="heading text-center animate__animated animate__fadeInLeft">
-      <h1>We Would Love Your Feedback!</h1>
     </div>
 
     <div class="form-container">
       <div class="form">
-        <div class="text">
-          <p>Required fields are marked with *</p>
-        </div>
         <form action="https://formspree.io/f/mrgnjjvw" method="POST">
-          <div class="names row">
-            <div class="mb-3 col-6">
-              <label for="firstName" class="form-label">First Name *</label>
-              <input
-                name="firstName"
-                class="form-control"
-                id="firstName"
-                placeholder="Bucky"
-                required
-                oninvalid="this.setCustomValidity('Please insert your first name')"
-                oninput="this.setCustomValidity('')"
-              />
-            </div>
-            <div class="mb-3 col-6">
-              <label for="lastName" class="form-label">Last Name *</label>
-              <input
-                name="lastName"
-                class="form-control"
-                id="lastName"
-                placeholder="Barnes"
-                required
-                oninvalid="this.setCustomValidity('Please insert your last name')"
-                oninput="this.setCustomValidity('')"
-              />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address *</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="wintersoldier@hydra.com"
-              required
-              oninvalid="this.setCustomValidity('Please insert your email address')"
-              oninput="this.setCustomValidity('')"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Leave a Message *</label>
-            <textarea
-              class="form-control"
-              id="message"
-              rows="6"
-              required
-              oninvalid="this.setCustomValidity('Please insert your message')"
-              oninput="this.setCustomValidity('')"
-            ></textarea>
-          </div>
-          <div class="form-buttons">
-            <div class="submit">
-              <button type="submit">Send</button>
-            </div>
-            <div class="reset">
-              <button type="reset">Reset</button>
-            </div>
-          </div>
-        </form>
+        <div class="mb-3">
+          <h2>We Would Love Your Feedback!</h2>
+            <label class="form-label"></label>
+            <input type="text" class="form-control border-2" name="Name" placeholder="Your Full Name" required />
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label"></label>
+            <input type="email" class="form-control border-2" name="Email" placeholder="Valid Email Address" required />
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label"></label>
+            <input type="tel" class="form-control border-2" name="Contact" placeholder="Mobile / Telephone Number" required/>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label"></label>
+            <textarea name="message" class="form-control border-2" rows="5" placeholder="Let us know how we can help and we'll get back to you soon!"></textarea>
+        </div>
+
+        <p class="p-2">* indicates a required field</p>
+        
+        <button type="submit" class="btn btn-outline-danger text-center">Submit</button>
+        <button type="reset" class="btn btn-outline-danger text-center">Reset</button>
+    </form>
       </div>
       <!-- Map Section -->
       <div class="map-container">
@@ -87,6 +51,36 @@
       </div>
     </div>
   </div>
+  <div class="contact-info">
+        <h2 class="contact-info-title">Contact Us</h2>
+        <div class="contact-details">
+          <p><strong>Address:</strong> 314 Imam Haroon Rd, Lansdowne, Cape Town, 7970</p>
+          <p><strong>Phone:</strong> +27 67 623 5929</p>
+          <p><strong>Email:</strong> ae.electronics@gmail.com</p>
+        </div>
+        
+        <!-- Icons Section -->
+        <div class="icons">
+          <a href="https://www.facebook.com/profile.php?id=100080682013385&mibextid=AEUHqQ" target="_blank" class="icon facebook">
+            <!-- Replace with your Facebook icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+             <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+            </svg>
+          </a>
+          <a href="https://github.com/harriselvin/node_mysql_vue_project.git" target="_blank" class="icon github">
+            <!-- Replace with your Github icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/asheekasamuels?igsh=MXVsdGpmYWgzOXhwYQ%3D%3D&utm_source=qr" target="_blank" class="icon instagram">
+            <!-- Replace with your Instagram icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+            </svg>
+          </a>
+        </div>
+      </div>
 </template>
 
 <script>
@@ -95,56 +89,67 @@ export default {};
 
 <style scoped>
 .contact-page {
-  background-color: black; /* Overall background color */
-  color: white; /* Text color */
+  background-color: black; 
+  color: #00bcd4; 
   font-family: Arial, sans-serif;
+  margin: 2px;
 }
 
 .heading {
   margin-bottom: 20px;
-  color: #00bcd4; /* Heading color */
+  color: #00bcd4; 
 }
 
 .form-container {
   width: 90%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  justify-content: center;
   gap: 20px;
 }
 
 .form {
-  background: #1e1e1e; /* Dark background for the form */
+  background: #1e1e1e; 
   padding: 20px;
   border-radius: 10px;
+  width: 50%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
 }
 
 .text {
   margin-bottom: 15px;
-  color: #00bcd4; /* Text color */
+  color: #00bcd4; 
 }
 
 input,
 textarea {
-  color: black; /* Text color */
-  border: 2px solid #00bcd4; /* Border color */
-  background: white; /* Input background */
+  color: black; 
+  border: 2px solid #00bcd4; 
+  background: white; 
+  width: 100%;
   border-radius: 5px;
+  padding: 10px;
+  margin:4px;
 }
 
 ::placeholder {
-  color: #888; /* Placeholder text color */
+  color: #888; 
+  font-family: Arial, sans-serif;
+  
 }
 
 .form-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Space between buttons */
+  gap: 10px; 
 }
 
 button {
-  color: white; /* Button text color */
-  background: #00bcd4; /* Button background */
+  color: white; 
+  margin: 8px;
+  background: #00bcd4; 
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -153,29 +158,57 @@ button {
 }
 
 button:hover {
-  background: #03a9f4; /* Hover background */
+  background: #03a9f4; 
   box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
 }
 
 button:active {
-  background: #0288d1; /* Active background */
+  background: #0288d1; 
 }
 
 .map-container {
-  background: #1e1e1e; /* Dark background for the map section */
+  background: #1e1e1e; 
   padding: 20px;
   border-radius: 10px;
+  margin:8px;
 }
 
 .map-title {
-  color: #00bcd4; /* Map section title color */
+  color: #00bcd4; 
   margin-bottom: 10px;
 }
 
 .map iframe {
   border: none;
   border-radius: 10px;
+  
 }
+.contact-info {
+    margin-top: 2rem;
+  }
+  .contact-info-title {
+    color: #00bcd4;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .contact-details {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .icon img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s;
+  }
+  .icon img:hover {
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    transform: scale(1.1);
+  }
 
 @media only screen and (max-width: 768px) {
   .form-container {

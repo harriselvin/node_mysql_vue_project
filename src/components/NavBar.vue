@@ -34,35 +34,31 @@
 </template>
 
 <style scoped>
-/* General Navbar Styles */
+
 nav {
-  background-color: #1B1717 !important; /* Dark background */
+  background-color: #1B1717 !important; 
   margin-bottom: 20px;
 }
 
-/* Logo Styling */
 .navImage {
   height: 60px;
   width: 60px;
 }
 
-/* Navbar Nav Alignment */
 .navbar-nav {
   display: flex;
-  justify-content: center; /* Center the nav links */
+  justify-content: center; 
   width: 100%;
 }
 
-/* Nav Buttons Styling */
 .navButtons {
-  margin: 0 15px; /* Space out the nav links */
-  color: #EEEBDD; /* Link color */
-  text-decoration: none; /* Remove underline from links */
-  font-size: 16px; /* Font size for links */
+  margin: 0 15px; 
+  color: #EEEBDD; 
+  text-decoration: none;
+  font-size: 16px; 
 }
 
-/* Active Link Styling */
 .navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid #CE1212; /* Active link underline */
+  border-bottom: 2px solid #00bcd4; 
 }
 </style>

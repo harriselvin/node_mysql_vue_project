@@ -37,7 +37,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ product.prodName }}</h5>
                 <p class="card-text">Price: {{ product.amount }}</p>
-                <a href="single-product.html" class="btn btn-primary">View More</a>
+                <router-link to="/single" class="btn-product">View More</router-link>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default {
         prodId: 4,
         prodName: "Smartphone Z Pixel Max 128GB Unlocked",
         quantity: 1,
-        amount: "1515.80"
+        amount: "1515.80",
         category: "Smartphones",
         prodUrl: "https://static.wixstatic.com/media/c22c23_527e6c6f3d944fb88c80907c2f754afb~mv2.jpg/v1/fill/w_416,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_527e6c6f3d944fb88c80907c2f754afb~mv2.jpg"
         },
@@ -227,7 +227,6 @@ input {
   gap: 4.5rem;
 }
 
-/* Main Banner Area */
 .page-heading {
   background-color: #f8f9fa;
   padding: 40px 0;
@@ -246,7 +245,6 @@ input {
   color: #6c757d;
 }
 
-/* Search and Sort Options */
 .search input {
   border-radius: 0.25rem;
 }
@@ -261,12 +259,10 @@ input {
   color: #fff;
 }
 
-/* Product Cards */
 .card {
-  background: #1b1b1b; /* Dark background for product items */
+  background: #1b1b1b; 
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow */
-  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
   padding: 15px;
   width: 250px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -274,12 +270,12 @@ input {
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
 }
 
 .card-img-top {
-  width: 100%; /* Make image fit the width of the container */
-  height: auto; /* Maintain aspect ratio */
+  width: 100%; 
+  height: auto;
   border-radius: 10px;
   margin-bottom: 10px;
   object-fit: cover;
@@ -288,6 +284,36 @@ input {
 .card-body {
   padding: 5px;
   margin: 10px;
+}
+
+.card-title {
+  font-size: 1em;
+  color: #00bcd4; /* Teal color for product names */
+  margin: 10px 0;
+}
+.card-text {
+  font-size: 1.2em;
+  color: #eee; 
+}
+
+.btn btn-primary {
+  background: #00bcd4; /* Teal background */
+  color: #eee; /* Light text color */
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  transition: background 0.3s, box-shadow 0.3s;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+.btn btn-primary  {
+  background: #03a9f4; /* Lighter blue background on hover */
+  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4); /* Subtle shadow on hover */
 }
 
 /* Pagination */

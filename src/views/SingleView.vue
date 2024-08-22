@@ -25,6 +25,7 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { useStore } from 'vuex'
 import { computed, onMounted } from 'vue'

@@ -165,14 +165,14 @@ button.learn-more:active {
 }
 
 .product-item h3 {
-  font-size: 1.5em;
+  font-size: 1rem;
   color: #00bcd4; /* Teal color for product names */
   margin: 10px 0;
 }
 
 .product-item p {
   font-size: 1.2em;
-  color: #eee; /* Light text color for prices */
+  color: #eee; 
 }
 
 /* Button Below Product Image */
