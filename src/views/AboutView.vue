@@ -106,6 +106,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
   gap: 10px;
 }
 
@@ -114,6 +117,7 @@ export default {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
+  
 }
 
 .info-section {
@@ -134,11 +138,17 @@ export default {
   font-size: 1.5em;
   color: #00bcd4;
   margin-bottom: 15px;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .info-text {
   font-size: 1.1em;
   color: #e0e0e0;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
   line-height: 1.6;
 }
 
@@ -155,6 +165,9 @@ export default {
   width: 100%;
   max-width: 300px;
   margin: 40px auto;
+  font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 .view-products-btn:hover {
