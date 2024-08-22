@@ -145,7 +145,7 @@ export default {
 
 .info-text {
   font-size: 1.1em;
-  color: #e0e0e0;
+  color: white;
   font-family: "JetBrains Mono", monospace;
   font-optical-sizing: auto;
   font-style: normal;
