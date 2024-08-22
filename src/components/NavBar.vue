@@ -28,8 +28,8 @@
           <router-link to="/" class="navButtons">Home</router-link>
           <router-link to="/about" class="navButtons">About</router-link>
           <router-link to="/products" class="navButtons">Products</router-link>
-          <router-link to="/admin" class="navButtons">Admin</router-link>
           <router-link to="/reachUs" class="navButtons">Reach Us</router-link>
+          <router-link to="/admin" class="navButtons">Admin</router-link>
         </div>
       </div>
     </div>
@@ -40,6 +40,9 @@
 
 nav {
   background-color: #1B1717 !important; 
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .navImage {
@@ -57,7 +60,7 @@ nav {
   margin: 0 15px; 
   color: #EEEBDD; 
   text-decoration: none;
-  font-size: 16px; 
+  font-size: 18px; 
 }
 
 .navbar-nav .router-link-exact-active {

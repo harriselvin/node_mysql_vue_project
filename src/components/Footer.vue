@@ -23,6 +23,9 @@ export default {
 div {
   background-color: #1B1717 !important; 
   color: white;
+  font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 </style>

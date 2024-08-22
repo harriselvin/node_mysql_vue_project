@@ -153,7 +153,9 @@ textarea {
 
 ::placeholder {
   color: #888; 
-  font-family: Arial, sans-serif;
+  font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
   
 }
 
@@ -204,6 +206,11 @@ button:active {
   border: none;
   border-radius: 10px;
   
+}
+p{
+  font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 .contact-info {
   margin-top: 2rem;
