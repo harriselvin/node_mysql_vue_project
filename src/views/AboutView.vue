@@ -200,4 +200,21 @@ export default {
     width: 200px; 
   }
 }
+/* Add this to your CSS file */
+
+.founder-image {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.image-section img {
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 </style>

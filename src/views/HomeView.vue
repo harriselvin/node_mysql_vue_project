@@ -281,4 +281,59 @@ button.learn-more:active {
     height: auto; 
   }
 }
+hero-content {
+            text-align: center;
+            padding: 20px;
+            opacity: 0; /* Start hidden for fade-in effect */
+            transform: translateY(20px); /* Start slightly down for slide-up effect */
+            animation: fadeInUp 1s forwards; /* Apply the animation */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: fadeIn 1s 0.5s forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            animation: fadeIn 1s 0.7s forwards; 
+        }
+
+        .hero-content button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            animation: fadeIn 1s 0.9s forwards; 
+        }
+
+        .hero-content button:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 </style>
