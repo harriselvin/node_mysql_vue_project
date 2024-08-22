@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1 class="text-center animate__animated animate__fadeInUp">Admin</h1>
+    <!-- Spinner for loading state -->
+    <SpinnerComp v-if="loading" />
+
+    <div class="admin-title">
+      <h1>Admin</h1>
+    </div>
     
     <div class="userSection">
       <div class="titles">
@@ -21,8 +26,8 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody v-for="user of users" :key="user.userID">
-            <tr v-if="users">
+          <tbody v-if="!loading && users.length > 0">
+            <tr v-for="user of users" :key="user.userID">
               <td>{{ user.userID }}</td>
               <td>{{ user.userName }}</td>
               <td class="remove">{{ user.lastName }}</td>
@@ -32,7 +37,9 @@
               <td><button @click="delUser(user.userID)" class="delButton">Delete</button></td>
               <td><EditUserComp /></td>
             </tr>
-            <tr v-else>
+          </tbody>
+          <tbody v-else>
+            <tr>
               <td colspan="8">No users available</td>
             </tr>
           </tbody>
@@ -59,8 +66,8 @@
               <th>Action</th>
             </tr>
           </thead>
-          <tbody v-for="product of products" :key="product.productID">
-            <tr v-if="products">
+          <tbody v-if="!loading && products.length > 0">
+            <tr v-for="product of products" :key="product.productID">
               <td class="remove">{{ product.productID }}</td>
               <td>{{ product.productName }}</td>
               <td class="remove">{{ product.quantity }}</td>
@@ -70,7 +77,9 @@
               <td><button @click="delProduct(product.productID)" class="delButton">Delete</button></td>
               <td><EditProductComp /></td>
             </tr>
-            <tr v-else>
+          </tbody>
+          <tbody v-else>
+            <tr>
               <td colspan="8">No products available</td>
             </tr>
           </tbody>
@@ -96,21 +105,22 @@
 
 <script>
 import AddUserComp from "@/components/AddUserComp.vue";
-import AddProductComp from "@/components/AddProductComp.vue";
+// import AddProductComp from "@/components/AddProductComp.vue";
 import EditProductComp from '@/components/EditProductComp.vue';
 import EditUserComp from "@/components/EditUserComp.vue";
+import SpinnerComp from "@/components/SpinnerComp.vue"; // Import Spinner
 import axios from "axios";
 
 export default {
-  created() {
-    this.$store.dispatch("getProducts");
-    this.$store.dispatch("getUsers");
-  },
   data() {
     return {
       showUserModal: false,
       showProductModal: false,
+      loading: true, // Add loading state
     };
+  },
+  created() {
+    this.loadData();
   },
   computed: {
     products() {
@@ -121,10 +131,21 @@ export default {
     },
   },
   methods: {
+    async loadData() {
+      try {
+        this.loading = true;
+        await Promise.all([
+          this.$store.dispatch("getProducts"),
+          this.$store.dispatch("getUsers")
+        ]);
+      } finally {
+        this.loading = false;
+      }
+    },
     async delProduct(id) {
       try {
-        await axios.delete(`https://your-api-url/products/${id}`);
-        this.$store.dispatch("getProducts");
+        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/products/${id}`);
+        this.loadData(); // Reload data
         alert("Product Removed");
       } catch (error) {
         alert(error.message);
@@ -132,23 +153,23 @@ export default {
     },
     async delUser(id) {
       try {
-        await axios.delete(`https://your-api-url/users/${id}`);
-        this.$store.dispatch("getUsers");
+        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/users/${id}`);
+        this.loadData(); // Reload data
         alert("User Removed");
       } catch (error) {
         alert(error.message);
       }
     },
     refreshData() {
-      this.$store.dispatch("getProducts");
-      this.$store.dispatch("getUsers");
+      this.loadData(); // Reload data
     },
   },
   components: {
     AddUserComp,
-    AddProductComp,
+    // AddProductComp,
     EditProductComp,
     EditUserComp,
+    SpinnerComp // Register Spinner component
   },
 };
 </script>
@@ -157,13 +178,22 @@ export default {
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
-  color: #333; /* Default text color */
-  background-color: #fff; /* Background color */
+  color: #333;
+  background-color: #fff;
 }
 
 img {
   height: 80px;
   width: 80px;
+}
+
+.admin-title {
+  padding: 40px 0;
+  margin-bottom: 20px;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: black;
 }
 
 table {
@@ -173,16 +203,16 @@ table {
 }
 
 th {
-  border: 2px solid #00bcd4; /* Border color */
+  border: 2px solid #00bcd4;
   width: 150px;
   padding: 10px;
-  background-color: #00bcd4; /* Background color */
-  color: #fff; /* Text color */
+  background-color: #00bcd4;
+  color: #fff;
 }
 
 td {
   padding: 10px;
-  border: 2px solid #00bcd4; /* Border color */
+  border: 2px solid #00bcd4;
 }
 
 .titles {
@@ -195,18 +225,18 @@ td {
 }
 
 .delButton {
-  background: #00bcd4; /* Background color */
-  color: #fff; /* Text color */
-  border: 2px solid #00bcd4; /* Border color */
+  background: #00bcd4;
+  color: #fff;
+  border: 2px solid #00bcd4;
   border-radius: 30px;
   box-shadow: 0 0 0 0 transparent;
   transition: all 0.2s ease-in;
 }
 
 .delButton:hover {
-  color: #fff; /* Text color */
-  background: #0097a7; /* Slightly darker shade for hover */
-  box-shadow: 0 0 30px 5px #0097a7; /* Slightly darker shade for hover */
+  color: #fff;
+  background: #0097a7;
+  box-shadow: 0 0 30px 5px #0097a7;
   transition: all 0.2s ease-out;
 }
 

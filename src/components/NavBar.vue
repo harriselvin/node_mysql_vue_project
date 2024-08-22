@@ -1,5 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" cross origin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <div class="container-fluid">
       <!-- Logo as a "Back to Home" button -->
       <router-link class="navbar-brand" to="/">
@@ -37,7 +40,6 @@
 
 nav {
   background-color: #1B1717 !important; 
-  margin-bottom: 20px;
 }
 
 .navImage {

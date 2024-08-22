@@ -50,7 +50,6 @@ export default {
 </script>
 
 <style scoped>
-/* Resetting box model and margin/padding for consistency */
 * {
   margin: 0;
   padding: 0;
@@ -59,22 +58,29 @@ export default {
 
 /* Global styles */
 .landing-page {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   color: #fff;
-  background: #121212; /* Dark background for a modern tech feel */
+  background: #121212;
 }
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(to right, #121212, #1e1e1e); /* Gradient for depth */
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-image: url('https://asheekasamuels.github.io/All-Images/images/imageback.jpg');
+  color: white;
   height: 80vh;
   text-align: center;
   padding: 20px;
   position: relative;
+  background-repeat: repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-image: fill 0 linear-gradient(rgba(0, 0, 0, 0.343),rgb(0, 0, 0, 0.241));
 }
 
 .hero-content {
@@ -84,20 +90,20 @@ export default {
 
 .hero-section h1 {
   font-size: 3.5em;
-  color: #00bcd4; /* Teal color for headings */
+  color: #00bcd4;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 188, 212, 0.5); /* Subtle shadow for text */
+  text-shadow: 2px 2px 4px rgba(0, 188, 212, 0.7); 
 }
 
 .hero-section p {
   font-size: 1.2em;
   line-height: 1.6;
   margin-bottom: 20px;
-  opacity: 0.8; /* Slightly transparent for modern look */
+  opacity: 0.8; 
 }
 
 button.learn-more {
-  background: #00bcd4; /* Teal background for button */
+  background: #00bcd4; 
   color: #fff;
   border: none;
   padding: 15px 30px;
@@ -105,13 +111,13 @@ button.learn-more {
   border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3); /* Shadow for depth */
+  box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3); 
 }
 
 button.learn-more:hover {
-  background: #03a9f4; /* Lighter blue on hover */
+  background: #03a9f4; 
   transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4); /* Enhanced shadow on hover */
+  box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
 }
 
 button.learn-more:active {
@@ -127,9 +133,9 @@ button.learn-more:active {
 
 .best-sellers h2 {
   font-size: 2.5em;
-  color: #00bcd4; /* Teal color for headings */
+  color: #00bcd4; 
   margin-bottom: 30px;
-  text-shadow: 1px 1px 3px rgba(0, 188, 212, 0.5); /* Subtle shadow for text */
+  text-shadow: 1px 1px 3px rgba(0, 188, 212, 0.5); 
 }
 
 /* Product List */
@@ -142,9 +148,9 @@ button.learn-more:active {
 
 /* Product Item Styles */
 .product-item {
-  background: #1b1b1b; /* Dark background for product items */
+  background: #1b1b1b; 
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
   text-align: center;
   padding: 15px;
   width: 250px;
@@ -153,12 +159,12 @@ button.learn-more:active {
 
 .product-item:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
 }
 
 .product-item img {
-  width: 100%; /* Make image fit the width of the container */
-  height: auto; /* Maintain aspect ratio */
+  width: 100%;
+  height: auto; 
   border-radius: 10px;
   margin-bottom: 10px;
   object-fit: cover;
@@ -166,7 +172,7 @@ button.learn-more:active {
 
 .product-item h3 {
   font-size: 1rem;
-  color: #00bcd4; /* Teal color for product names */
+  color: #00bcd4;
   margin: 10px 0;
 }
 
@@ -175,10 +181,9 @@ button.learn-more:active {
   color: #eee; 
 }
 
-/* Button Below Product Image */
 .btn-product {
-  background: #00bcd4; /* Teal background */
-  color: #eee; /* Light text color */
+  background: #00bcd4; 
+  color: #eee;
   border: none;
   border-radius: 30px;
   padding: 10px 20px;
@@ -192,19 +197,88 @@ button.learn-more:active {
 }
 
 .btn-product:hover {
-  background: #03a9f4; /* Lighter blue background on hover */
-  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4); /* Subtle shadow on hover */
+  background: #03a9f4; 
+  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.4); 
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 705px) {
+  .hero-section {
+    height: auto; 
+    padding: 10px;
+    font-size: 0.8em; 
+  }
+  
+  .hero-section h1 {
+    font-size: 2em; 
+  }
+  
+  .hero-section p {
+    font-size: 0.9em; 
+  }
+  
+  button.learn-more {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+
+  .best-sellers h2 {
+    font-size: 1.8em; 
+  }
+  
   .product-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 5px;
   }
-  .card {
-    margin-top: 10px;
+  
+  .product-item {
+    width: 100%; 
+    padding: 10px;
+  }
+  
+  .product-item img {
+    height: auto; 
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .hero-section {
+    height: auto; 
+    padding: 10px;
+    font-size: 0.8em; 
+  }
+  
+  .hero-section h1 {
+    font-size: 2em; 
+  }
+  
+  .hero-section p {
+    font-size: 0.9em; 
+  }
+  
+  button.learn-more {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+
+  .best-sellers h2 {
+    font-size: 1.8em; 
+  }
+  
+  .product-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  
+  .product-item {
+    width: 100%; 
+    padding: 10px;
+  }
+  
+  .product-item img {
+    height: auto; 
   }
 }
 </style>

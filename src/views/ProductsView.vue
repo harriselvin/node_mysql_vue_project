@@ -1,3 +1,5 @@
+
+
 <template>
   <div>
     <!-- Main Banner Area -->
@@ -6,7 +8,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="inner-content">
-              <h2>Check Our Products</h2>
+              <h1>Check Our Products</h1>
             </div>
           </div>
         </div>
@@ -29,8 +31,13 @@
           </div>
         </div>
 
+        <!-- Loading Spinner -->
+        <div v-if="loading" class="d-flex justify-content-center">
+          <SpinnerComp />
+        </div>
+
         <!-- Products Display -->
-        <div v-if="filteredProducts.length > 0" class="row justify-content-center">
+        <div v-else-if="filteredProducts.length > 0" class="row justify-content-center">
           <div v-for="product in filteredProducts" :key="product.prodId" class="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="card">
               <img :src="product.prodUrl" :alt="product.prodName" class="card-img-top" />
@@ -53,10 +60,10 @@
             </div>
           </div>
         </div>
-        
-        <!-- Loading Spinner -->
+
+        <!-- No Products Found -->
         <div v-else class="d-flex justify-content-center">
-          <SpinnerComp />
+          <p>No products found.</p>
         </div>
       </div>
     </section>
@@ -82,12 +89,12 @@ export default {
           prodUrl: "https://static.wixstatic.com/media/c22c23_a055ae2dfe6f457b9c2f6f3fa6d95126~mv2.png/v1/fill/w_416,h_416,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/c22c23_a055ae2dfe6f457b9c2f6f3fa6d95126~mv2.png"
         },
         {
-        prodId: 2,
-        prodName: "Shel 50 Class LED 4K UHD Smart TV",
-        quantity: 1,
-        amount: "1783.29",
-        category: "TV & Home Cinema",
-        prodUrl: "https://static.wixstatic.com/media/c22c23_77c2b89535374768bec1d6337dcdbddc~mv2.jpg/v1/fill/w_416,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_77c2b89535374768bec1d6337dcdbddc~mv2.jpg"
+          prodId: 2,
+          prodName: "Shel 50 Class LED 4K UHD Smart TV",
+          quantity: 1,
+          amount: "1783.29",
+          category: "TV & Home Cinema",
+          prodUrl: "https://static.wixstatic.com/media/c22c23_77c2b89535374768bec1d6337dcdbddc~mv2.jpg/v1/fill/w_416,h_416,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_77c2b89535374768bec1d6337dcdbddc~mv2.jpg"
         },
         {
         prodId: 3,
@@ -138,6 +145,7 @@ export default {
         prodUrl: "https://static.wixstatic.com/media/c22c23_c25f748ee2264db6a3767d99717a2b84~mv2.jpg/v1/fill/w_430,h_430,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/c22c23_c25f748ee2264db6a3767d99717a2b84~mv2.jpg"
         }
       ],
+      loading: true, 
     };
   },
   methods: {
@@ -157,6 +165,15 @@ export default {
           : b.prodName.localeCompare(a.prodName);
       });
     },
+    fetchProducts() {
+    
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+      
+        // this.products = fetchedData;
+      }, 2000); 
+    }
   },
   computed: {
     filteredProducts() {
@@ -165,12 +182,20 @@ export default {
         return nameMatch;
       });
     },
+    pages() {
+      
+      return [];
+    }
+  },
+  created() {
+    this.fetchProducts(); 
   },
   components: {
     SpinnerComp,
   },
 };
 </script>
+
 
 <style scoped>
 
@@ -228,15 +253,18 @@ input {
 }
 
 .page-heading {
-  background-color: #f8f9fa;
   padding: 40px 0;
   margin-bottom: 20px;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color:black,
 }
 
 .page-heading .inner-content h2 {
   margin-bottom: 10px;
-  font-size: 2rem;
-  color: #343a40;
+  font-size: rem;
+  color: black;
 }
 
 .page-heading .inner-content span {
@@ -332,6 +360,9 @@ input {
   .col-lg-3 {
     flex: 0 0 100%;
     max-width: 100%;
+    justify-content: center;
   }
 }
+
+
 </style>

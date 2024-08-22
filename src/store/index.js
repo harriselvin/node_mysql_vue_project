@@ -1,4 +1,7 @@
 import { createStore } from 'vuex';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 const url = "https://node-mysql-vue-project-60pu.onrender.com/";
 
@@ -12,23 +15,23 @@ export default createStore({
   },
 
   mutations: {
-    setProducts: (state, value) => {
-      state.products = value;
+    SET_PRODUCTS(state, products) {
+      state.products = products;
     },
-    setProduct: (state, value) => {
-      state.product = value;
+    SET_PRODUCT(state, product) {
+      state.product = product;
     },
-    setUsers: (state, value) => {
-      state.users = value;
+    SET_USERS(state, users) {
+      state.users = users;
     },
-    sortByPrice: (state) => {
+    SORT_BY_PRICE(state) {
       state.products.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
       if (!state.asc) {
         state.products.reverse();
       }
       state.asc = !state.asc;
     },
-    sortByName: (state) => {
+    SORT_BY_NAME(state) {
       state.products.sort((a, b) => {
         if (a.prodName < b.prodName) return -1;
         if (a.prodName > b.prodName) return 1;
@@ -40,42 +43,30 @@ export default createStore({
       state.asc = !state.asc;
     },
   },
-  
+
   actions: {
-    fetchProducts: async ({ commit }) => {
+    async fetchProducts({ commit }) {
       try {
-        const res = await fetch(`${url}products`);
-        if (!res.ok) throw new Error("Unable to fetch products");
-        const products = await res.json();
-        console.log(products.results);
-        commit("setProducts", products.results);
+        const response = await axios.get(`${url}products`);
+        commit('SET_PRODUCTS', response.data.results);
       } catch (error) {
-        console.error("Error fetching products:", error);
-        // Optionally handle the error in state or provide user feedback
+        console.error('Error fetching products:', error);
       }
     },
-    getProduct: async ({ commit }, id) => {
+    async fetchProduct({ commit }, id) {
       try {
-        const res = await fetch(`${url}product/${id}`);
-        if (!res.ok) throw new Error("Unable to fetch product");
-        const { result } = await res.json();
-        console.log(result);
-        commit("setProduct", result);
+        const response = await axios.get(`${url}product/${id}`);
+        commit('SET_PRODUCT', response.data.result);
       } catch (error) {
-        console.error("Error fetching product:", error);
-        // Optionally handle the error in state or provide user feedback
+        console.error('Error fetching product:', error);
       }
     },
-    getUsers: async ({ commit }) => {
+    async getUsers({ commit }) {
       try {
-        const res = await fetch(`${url}users`);
-        if (!res.ok) throw new Error("Unable to fetch users");
-        const users = await res.json();
-        console.log(users.results);
-        commit("setUsers", users.results);
+        const response = await axios.get(`${url}users`);
+        commit('SET_USERS', response.data.results);
       } catch (error) {
-        console.error("Error fetching users:", error);
-        // Optionally handle the error in state or provide user feedback
+        console.error('Error fetching users:', error);
       }
     },
   },

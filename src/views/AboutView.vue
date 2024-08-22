@@ -1,6 +1,8 @@
 <template>
   <div class="about-page">
-    <h2 class="page-title">About Us</h2>
+    <div class="page-title">
+      <h1>About Us</h1>
+    </div>
     <div class="content-container">
       <div class="image-section">
         <img 
@@ -75,18 +77,19 @@ export default {
 }
 
 .about-page {
-  background: linear-gradient(135deg, #1f1f1f, #0d0d0d);
-  color: #fff;
-  font-family: "Roboto", sans-serif;
+  background: white;
+  color: black;
   padding: 20px;
   min-height: 100vh;
 }
 
 .page-title {
-  font-size: 2.5em;
-  color: #00bcd4;
-  text-align: center;
+  padding: 40px 0;
   margin-bottom: 20px;
+  font-size: 2rem;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .content-container {
@@ -121,7 +124,7 @@ export default {
 }
 
 .info-box {
-  background: rgba(255, 255, 255, 0.1);
+  background: black;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
@@ -163,14 +166,25 @@ export default {
   background: #0288d1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   .content-container {
     flex-direction: column;
     align-items: center;
   }
 
   .founder-image {
-    width: 100px; /* Adjust image width for smaller screens */
+    width: 100px; 
+  }
+}
+
+@media (max-width: 300px) {
+  .content-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .founder-image {
+    width: 200px; 
   }
 }
 </style>
