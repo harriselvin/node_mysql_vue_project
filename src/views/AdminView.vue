@@ -6,106 +6,104 @@
     <div class="admin-title">
       <h1>Admin</h1>
     </div>
-    
-    <div class="userSection">
-      <div class="titles">
-        <h3>Users</h3>
-        <button @click="showUserModal = true" class="addButton">Add User</button>
+
+  <div class="userSection">
+    <div class="titles">
+      <h3>Users</h3>
+      <div>
+        <add-user-comp />
       </div>
-      <div class="userTable">
-        <table>
-          <thead>
-            <tr>
-              <th>userID</th>
-              <th>First Name</th>
-              <th class="remove">Last Name</th>
-              <th class="emailHead">Email Address</th>
-              <th class="remove">Gender</th>
-              <th class="remove">Age</th>
-              <th>Action</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-if="!loading && users.length > 0">
-            <tr v-for="user of users" :key="user.userID">
-              <td>{{ user.userID }}</td>
-              <td>{{ user.userName }}</td>
-              <td class="remove">{{ user.lastName }}</td>
-              <td class="emailHead">{{ user.emailAdd }}</td>
-              <td class="remove">{{ user.gender }}</td>
-              <td class="remove">{{ user.age }}</td>
-              <td><button @click="delUser(user.userID)" class="delButton">Delete</button></td>
-              <td><EditUserComp /></td>
-            </tr>
-          </tbody>
+    </div>
+    <div class="userTable">
+      <table>
+        <tr>
+          <th>userID</th>
+          <th>First Name</th>
+          <th class="remove">Last Name</th>
+          <th class="emailHead">Email Address</th>
+          <th class="remove">Gender</th>
+          <th class="remove">Age</th>
+          <th>Action</th>
+          <th>Action</th>
+        </tr>
+        <tbody v-for="user of users" :key="user.userID" :user="user">
+          <tr v-if="users">
+            <td>{{ user.userID }}</td>
+            <td>{{ user.firstName }}</td>
+            <td class="remove">{{ user.lastName }}</td>
+            <td class="emailHead">{{ user.emailAdd }}</td>
+            <td class="remove">{{ user.gender }}</td>
+            <td class="remove">{{ user.userAge }}</td>
+            <td><button @click="delUser(user.userID)" class="delButton">Delete</button></td>
+            <td>
+              <edit-user-comp/>
+            </td>
+          </tr>
           <tbody v-else>
             <tr>
               <td colspan="8">No users available</td>
             </tr>
           </tbody>
-        </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="productSection">
+    <div class="titles">
+      <h3>Products</h3>
+      <div>
+        <add-product-comp />
       </div>
     </div>
-  
-    <div class="productSection">
-      <div class="titles">
-        <h3>Products</h3>
-        <button @click="showProductModal = true" class="addButton">Add Product</button>
-      </div>
-      <div class="productsTable">
-        <table>
-          <thead>
-            <tr>
-              <th class="remove">Product ID</th>
-              <th>Product Name</th>
-              <th class="remove">Quantity</th>
-              <th class="remove">Price</th>
-              <th class="imgHead">Category</th>
-              <th class="imgHead">Image</th>
-              <th>Action</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-if="!loading && products.length > 0">
-            <tr v-for="product of products" :key="product.productID">
-              <td class="remove">{{ product.productID }}</td>
-              <td>{{ product.productName }}</td>
-              <td class="remove">{{ product.quantity }}</td>
-              <td class="remove">{{ product.price }}</td>
-              <td class="imgHead">{{ product.category }}</td>
-              <td class="imgHead"><img :src="product.imageURL" :alt="product.productName" /></td>
-              <td><button @click="delProduct(product.productID)" class="delButton">Delete</button></td>
-              <td><EditProductComp /></td>
-            </tr>
-          </tbody>
+    <div class="productsTable">
+      <table>
+        <thead>
+          <tr>
+            <th class="remove">Product ID</th>
+            <th>Product Name</th>
+            <th class="remove">Quantity</th>
+            <th class="remove">Price</th>
+            <th class="imgHead">Category</th>
+            <th class="imgHead">Image</th>
+            <th>Action</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody
+          v-for="product of products"
+          :key="product.productId"
+          :product="product"
+        >
+          <tr v-if="products">
+            <td class="remove">{{ product.prodId }}</td>
+            <td>{{ product.prodName }}</td>
+            <td class="remove">{{ product.quantity }}</td>
+            <td class="remove">{{ product.amount }}</td>
+            <td class="imgHead">{{ product.category }}</td>
+            <td class="imgHead"><img :src="product.prodUrl" :alt="product.productName" /></td>
+            <td>
+              <button @click="delProduct(product.productID)" class="delButton">Delete</button>
+            </td>
+            <td>
+                <edit-product-comp/>
+            </td>
+          </tr>
           <tbody v-else>
             <tr>
               <td colspan="8">No products available</td>
             </tr>
           </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
-
-    <!-- User Modal -->
-    <AddUserComp
-      :show="showUserModal"
-      @close="showUserModal = false"
-      @user-added="refreshData"
-    />
-
-    <!-- Product Modal -->
-    <AddProductComp
-      :show="showProductModal"
-      @close="showProductModal = false"
-      @product-added="refreshData"
-    />
+  </div>
   </div>
 </template>
 
 <script>
 import AddUserComp from "@/components/AddUserComp.vue";
-// import AddProductComp from "@/components/AddProductComp.vue";
+import AddProductComp from "@/components/AddProductComp.vue";
 import EditProductComp from '@/components/EditProductComp.vue';
 import EditUserComp from "@/components/EditUserComp.vue";
 import SpinnerComp from "@/components/SpinnerComp.vue"; // Import Spinner
@@ -135,8 +133,8 @@ export default {
       try {
         this.loading = true;
         await Promise.all([
-          this.$store.dispatch("getProducts"),
-          this.$store.dispatch("getUsers")
+          this.$store.dispatch("fetchProducts"),
+          this.$store.dispatch("fetchUsers")
         ]);
       } finally {
         this.loading = false;
@@ -166,7 +164,7 @@ export default {
   },
   components: {
     AddUserComp,
-    // AddProductComp,
+    AddProductComp,
     EditProductComp,
     EditUserComp,
     SpinnerComp // Register Spinner component
@@ -175,17 +173,6 @@ export default {
 </script>
 
 <style scoped>
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  color: #333;
-  background-color: #fff;
-}
-
-img {
-  height: 80px;
-  width: 80px;
-}
 
 .admin-title {
   padding: 40px 0;
@@ -195,19 +182,20 @@ img {
   font-style: normal;
   color: black;
 }
+img {
+  height: 80px;
+  width: 80px;
+}
 
 table {
   width: 90%;
   text-align: center;
   margin: auto;
 }
-
 th {
   border: 2px solid #00bcd4;
   width: 150px;
   padding: 10px;
-  background-color: #00bcd4;
-  color: #fff;
 }
 
 td {
@@ -221,36 +209,40 @@ td {
 }
 
 .userSection, .productSection {
-  margin: 20px;
+    margin: 20px;
 }
 
 .delButton {
-  background: #00bcd4;
-  color: #fff;
+    background: #00bcd4;
+  color: #eeebdd;
   border: 2px solid #00bcd4;
   border-radius: 30px;
   box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
 }
 
 .delButton:hover {
-  color: #fff;
-  background: #0097a7;
-  box-shadow: 0 0 30px 5px #0097a7;
+     color: #eeebdd;
+  background: #00bcd4;
+  box-shadow: 0 0 30px 5px #00bcd4;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
-/* Media Queries */
 @media only screen and (max-width: 700px) {
-  .imgHead, .emailHead {
+  .imgHead, .emailHead{
     display: none;
   }
   table {
     width: 100%;
   }
+ 
 }
 
-@media only screen and (max-width: 305px) {
+@media only screen and (max-width: 305px){
   .remove {
     display: none;
   }
