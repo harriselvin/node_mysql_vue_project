@@ -26,7 +26,6 @@ const checkUser = async (req, res, next) => {
             message: "Invalid email or password"
         })
     }
-    
 }
 
 const verifyToken = (req, res, next) => {
