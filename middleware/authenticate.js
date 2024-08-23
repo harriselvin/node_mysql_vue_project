@@ -17,6 +17,7 @@ const checkUser = async (req, res, next) => {
             req.body.token = token 
             next()
             return
+            
         } else {
             res.status(400).json({message: "Invalid email or password"})
         }
