@@ -142,7 +142,7 @@ export default {
     },
     async delProduct(id) {
       try {
-        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/products/${id}`);
+        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/products/delete/${id}`);
         this.loadData(); // Reload data
         alert("Product Removed");
       } catch (error) {
@@ -151,7 +151,7 @@ export default {
     },
     async delUser(id) {
       try {
-        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/users/${id}`);
+        await axios.delete(`https://node-mysql-vue-project-60pu.onrender.com/users/delete/${id}`);
         this.loadData(); // Reload data
         alert("User Removed");
       } catch (error) {

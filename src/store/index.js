@@ -35,6 +35,12 @@ export default createStore({
     setProduct(state, value) {
       state.product = value
     },
+    sortByPrice(state) {
+      state.products.sort((a, b) => a.amount - b.amount)
+    },
+    sortByName(state) {
+      state.products.sort((a, b) => a.prodName.localeCompare(b.prodName))
+    }
   },
   actions: {
     // ==== User ========
@@ -274,9 +280,13 @@ export default createStore({
           position: toast.POSITION.BOTTOM_CENTER
         })
       }
+    },
+    sortByPrice({ commit }) {
+      commit('sortByPrice')
+    },
+    sortByName({ commit }) {
+      commit('sortByName')
     }
-  },
-  modules: {
   }
 })
 

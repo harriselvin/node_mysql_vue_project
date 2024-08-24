@@ -4,7 +4,7 @@
           <h3 class="display-2">Product Details</h3>
       </div>
       <div class="row justify-content-center" v-if="product">
-          <card-comp>
+          <card-comp class="product">
               <template #cardHeader>
                   <img :src="product.prodUrl" loading="lazy" class="img-fluid" style="width: 200px;" :alt="product.prodName" data-aos="flip-right" data-aos-duration="1500">
               </template>
@@ -47,7 +47,10 @@ h3{
   text-shadow: black; /* Matching shadow for consistency */
 }
 .lead1{
-  color: #162052;
+  color: #00bcd4;
 }
-
+.product {
+  width: clamp(10em, 100%, 40em);
+  margin: 2em;
+}
 </style>

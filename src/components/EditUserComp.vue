@@ -80,7 +80,7 @@ export default {
   methods: {
     updateUser(userID) {
       axios
-        .put(`https://node-mysql-vue-project-60pu.onrender.com/users/update/${userID}`, {
+        .patch(`https://node-mysql-vue-project-60pu.onrender.com/users/update/${userID}`, {
           firstName: this.firstName,
           lastName: this.lastName,
           emailAdd: this.emailAdd,
@@ -92,7 +92,7 @@ export default {
           this.$emit("refreshData");
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error, "Error updating user info");
         });
     }
   },
