@@ -8,7 +8,7 @@
         <div class="options row mb-4">
           <div class="col-md-6">
             <div class="search">
-              <input type="text" v-model="search" class="form-control" placeholder="Search" />
+              <input type="text" v-model="searchQuery" class="form-control" placeholder="Search" />
             </div>
           </div>
           <div class="col-md-6 text-md-right">
@@ -16,17 +16,16 @@
             <button @click="sortByName" class="sort">Sort by Name</button>
           </div>
         </div>
-      {{Products}}
-      <div class="row gap-2 justify-content-center my-2" v-if="products">
-          <card-comp v-for="product in products" v-bind:key="product.prodID">
+      <div class="row gap-2 justify-content-center my-2" v-if="filteredProducts">
+          <card-comp v-for="product in filteredProducts" v-bind:key="product.prodId">
               <template #cardHeader>
                   <img :src="product.prodUrl" loading="lazy" class="img-fluid" style="height: 200px;" :alt="product.prodName">
               </template>
               <template #cardBody>
                   <h5 class="card-title fw-bold">{{ product.prodName }}</h5>
-                  <p class="lead"><span class="text-success fw-bold">Amount</span>: R{{ product.amount }}</p>
+                  <p class="lead"><span class="amount fw-bold">Amount</span>: R{{ product.amount }}</p>
                   <div class="button-wrapper d-md-flex d-block justify-content-between">
-                      <router-link :to="{name:'product',params:{id:product.prodId}}">
+                      <router-link class="prod-btn" :to="{name:'product',params:{id:product.prodId}}">
                         <button class="btn btn-dark" value="0">Go to Product</button>
                       </router-link>
                   </div>
@@ -43,13 +42,15 @@
 <script setup>
 /*eslint-disable*/
 import { useStore } from 'vuex'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref  } from 'vue'
 import SpinnerComp from '@/components/SpinnerComp.vue'
 import CardComp from '@/components/CardComp.vue'
 import { useRoute } from 'vue-router'
 const store = useStore()
 const route = useRoute()
 const products = computed(() => store.state.products)
+const searchQuery = ref('')
+
 onMounted(() => {
   store.dispatch('fetchProducts')
 })
@@ -64,7 +65,14 @@ function sortByName() {
 
 const loading = computed(() => store.state.loading)
 
-const search = computed(() => store.state.search)
+const filteredProducts = computed(() => {
+  if (products.value === null) {
+    return []
+  }
+  return products.value.filter(product => {
+    return product.prodName.toLowerCase().includes(searchQuery.value.toLowerCase())
+  })
+})
 </script>
 
 
@@ -130,14 +138,17 @@ input {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.button-wrapper {
-  margin-top: 20px;
+.prod-btn{
+  width: 100%;
 }
 .btn {
   margin: 10px;
 }
 .mg-fluid{
   z-index: -6;
+}
+.lead > .amount{
+  color: #00bcd4;
 }
 </style>
 

@@ -96,10 +96,13 @@ export default {
             this.Category= "";
             this.imageURL= "";
             alert("Product Has Been Updated");
-            window.location.reload();
+            this.loadData()
         } catch (error) {
-            alert (error);
+            alert ("Error updating product");
         }
+    },
+    refreshData() {
+      this.loadData(); // Reload data
     },
   },
 };

@@ -31,12 +31,12 @@
         <div class="modal-body">
           <div class="inputs">
             <label>First Name</label>
-            <input type="text" v-model="userName" placeholder="Bruce" /><br />
+            <input type="text" v-model="userName" /><br />
           </div>
 
           <div class="inputs">
             <label>Last Name</label>
-            <input type="text" v-model="lastName" placeholder="Wayne" /><br />
+            <input type="text" v-model="lastName" /><br />
           </div>
 
           <div class="inputs">
@@ -44,18 +44,17 @@
             <input
               type="text"
               v-model="emailAdd"
-              placeholder="bwayne@batmancorp.org"
             /><br />
           </div>
 
           <div class="inputs">
             <label>Gender</label>
-            <input type="text" v-model="gender" placeholder="Male" /><br />
+            <input type="text" v-model="gender" /><br />
           </div>
 
           <div class="inputs">
             <label>Age</label>
-            <input type="number" v-model="age" placeholder="30" /><br />
+            <input type="number" v-model="age" /><br />
           </div>
 
           <div class="inputs">
@@ -89,26 +88,28 @@ export default {
   methods: {
     async addNewUser() {
       try {
-        await axios.post('https://node-mysql-vue-project-60pu.onrender.com/users', {
-          userName: this.userName,
+        await axios.post('https://node-mysql-vue-project-60pu.onrender.com/users/register', {
+          firstName: this.firstName,
           lastName: this.lastName,
           emailAdd: this.emailAdd,
           gender: this.gender,
-          age: this.age,
+          userAge: this.userAge,
           userPass: this.userPass,
         });
-        this.userName = "";
+        this.firstName = "";
         this.lastName = "";
         this.emailAdd = "";
         this.gender = "";
-        this.age = "";
+        this.userAge = "";
         this.userPass = "";
-        this.$router.push("/admin");
         alert("User Has Successfully Been Added");
-        window.location.reload();
+        this.loadData()
       } catch (error) {
-        alert(error);
+        alert("Error adding user");
       }
+    },
+    refreshData() {
+      this.loadData(); // Reload data
     },
   },
 };

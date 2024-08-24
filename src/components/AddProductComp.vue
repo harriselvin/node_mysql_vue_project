@@ -38,23 +38,22 @@
             <input
               type="text"
               v-model="productName"
-              placeholder="Defy Toaster"
             /><br />
           </div>
 
           <div class="inputs">
             <label>Quantity</label>
-            <input type="number" v-model="Quantity" placeholder="45" /><br />
+            <input type="number" v-model="Quantity" /><br />
           </div>
 
           <div class="inputs">
             <label>Price</label>
-            <input type="number" v-model="Price" placeholder="400" /><br />
+            <input type="number" v-model="Price" /><br />
           </div>
 
           <div class="inputs">
             <label>Category</label>
-            <input type="text" v-model="Category" placeholder="Toaster" /><br />
+            <input type="text" v-model="Category" /><br />
           </div>
 
           <div class="inputs">
@@ -85,11 +84,11 @@ export default {
   methods: {
     async addNewProd() {
       try {
-        await axios.post('https://node-mysql-vue-project-60pu.onrender.com/products', {
+        await axios.post('https://node-mysql-vue-project-60pu.onrender.com/products/addProduct', {
           productName: this.productName,
           Quantity: this.Quantity,
           Price: this.Price,
-          Category: this.Quantity,
+          Category: this.Category,
           imageURL: this.imageURL,
         });
         this.productName = "";
@@ -98,10 +97,15 @@ export default {
         this.Category = "";
         this.imageURL = "";
         alert("Product Has Been Added");
-        window.location.reload();
+        this.loadData()
       } catch (error) {
-        alert(error);
+        console.error("Error adding product:",  error);
+        
+        alert("Error adding product");
       }
+    },
+    refreshData() {
+      this.loadData(); // Reload data
     },
   },
 };
