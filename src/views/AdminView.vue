@@ -188,19 +188,22 @@ img {
 }
 
 table {
-  width: 90%;
+  width: clamp(20%, 100vw, 90%);
   text-align: center;
   margin: auto;
+  table-layout: fixed;
 }
 th {
   border: 2px solid #00bcd4;
-  width: 150px;
   padding: 10px;
 }
 
 td {
   padding: 10px;
   border: 2px solid #00bcd4;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  word-wrap: break-word;
 }
 
 .titles {
